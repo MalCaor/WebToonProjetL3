@@ -11,31 +11,31 @@ void
 webtoon_prog_1(char *host)
 {
 	CLIENT *clnt;
-	void  *result_1;
+	void  *result_init;
 	char *init_1_arg;
-	int  *result_2;
+	int  *result_inscription;
 	compte  inscription_1_arg;
-	int  *result_3;
+	int  *result_maj_info;
 	compte  maj_info_1_arg;
-	listSerie  *result_4;
+	listSerie  *result_afficher_serie;
 	argTri  afficher_serie_1_arg;
-	int  *result_5;
+	int  *result_acheter_serie;
 	argAchaSerie  acheter_serie_1_arg;
-	int  *result_6;
+	int  *result_ajouter_note;
 	argAjouterNote  ajouter_note_1_arg;
-	int  *result_7;
+	int  *result_acheter_coin;
 	argAchaCoin  acheter_coin_1_arg;
-	int  *result_8;
+	int  *result_afficher_coin;
 	compte  afficher_coin_1_arg;
-	int  *result_9;
+	int  *result_ajouter_favoris;
 	argAchaSerie  ajouter_favoris_1_arg;
-	listSerie  *result_10;
+	listSerie  *result_afficher_favoris;
 	compte  afficher_favoris_1_arg;
-	int  *result_11;
+	int  *result_supprimer_favoris;
 	argAchaSerie  supprimer_favoris_1_arg;
-	int  *result_12;
+	int  *result_ajouter_commentaire;
 	argAjoutComm  ajouter_commentaire_1_arg;
-	int  *result_13;
+	int  *result_supprimer_commentaire;
 	argAjoutComm  supprimer_commentaire_1_arg;
 
 #ifndef	DEBUG
@@ -46,56 +46,68 @@ webtoon_prog_1(char *host)
 	}
 #endif	/* DEBUG */
 
-	result_1 = init_1((void*)&init_1_arg, clnt);
-	if (result_1 == (void *) NULL) {
+	result_init = init_1((void*)&init_1_arg, clnt);
+	if (result_init == (void *) NULL) {
 		clnt_perror (clnt, "Init call failed");
 	}
-	result_2 = inscription_1(&inscription_1_arg, clnt);
-	if (result_2 == (int *) NULL) {
+	result_inscription = inscription_1(&inscription_1_arg, clnt);
+	if (result_inscription == (int *) NULL) {
 		clnt_perror (clnt, "Inscription call failed");
 	}
-	result_3 = maj_info_1(&maj_info_1_arg, clnt);
-	if (result_3 == (int *) NULL) {
+	result_maj_info = maj_info_1(&maj_info_1_arg, clnt);
+	if (result_maj_info == (int *) NULL) {
 		clnt_perror (clnt, "Maj Info call failed");
 	}
-	result_4 = afficher_serie_1(&afficher_serie_1_arg, clnt);
-	if (result_4 == (listSerie *) NULL) {
+	result_afficher_serie = afficher_serie_1(&afficher_serie_1_arg, clnt);
+	if (result_afficher_serie == (listSerie *) NULL) {
 		clnt_perror (clnt, "Afficher Serie call failed");
 	}
-	result_5 = acheter_serie_1(&acheter_serie_1_arg, clnt);
-	if (result_5 == (int *) NULL) {
+	result_acheter_serie = acheter_serie_1(&acheter_serie_1_arg, clnt);
+	if (result_acheter_serie == (int *) NULL) {
 		clnt_perror (clnt, "Acheter Serie call failed");
 	}
-	result_6 = ajouter_note_1(&ajouter_note_1_arg, clnt);
-	if (result_6 == (int *) NULL) {
-		clnt_perror (clnt, "Ajouter Note call failed");
-	}
-	result_7 = acheter_coin_1(&acheter_coin_1_arg, clnt);
-	if (result_7 == (int *) NULL) {
+	result_acheter_coin = acheter_coin_1(&acheter_coin_1_arg, clnt);
+	if (result_acheter_coin == (int *) NULL) {
 		clnt_perror (clnt, "Acheter Coin call failed");
 	}
-	result_8 = afficher_coin_1(&afficher_coin_1_arg, clnt);
-	if (result_8 == (int *) NULL) {
+	result_maj_info = maj_info_1(&maj_info_1_arg, clnt);
+	if (result_maj_info == (int *) NULL) {
+		clnt_perror (clnt, "Maj Info call failed");
+	}
+	result_acheter_coin = acheter_coin_1(&acheter_coin_1_arg, clnt);
+	if (result_acheter_coin == (int *) NULL) {
+		clnt_perror (clnt, "Acheter Coin call failed");
+	}
+
+
+
+
+	result_ajouter_note = ajouter_note_1(&ajouter_note_1_arg, clnt);
+	if (result_ajouter_note == (int *) NULL) {
+		clnt_perror (clnt, "Ajouter Note call failed");
+	}
+	result_afficher_coin = afficher_coin_1(&afficher_coin_1_arg, clnt);
+	if (result_afficher_coin == (int *) NULL) {
 		clnt_perror (clnt, "Afficher Coincall failed");
 	}
-	result_9 = ajouter_favoris_1(&ajouter_favoris_1_arg, clnt);
-	if (result_9 == (int *) NULL) {
+	result_ajouter_favoris = ajouter_favoris_1(&ajouter_favoris_1_arg, clnt);
+	if (result_ajouter_favoris == (int *) NULL) {
 		clnt_perror (clnt, "Ajouter Favoris call failed");
 	}
-	result_10 = afficher_favoris_1(&afficher_favoris_1_arg, clnt);
-	if (result_10 == (listSerie *) NULL) {
+	result_afficher_favoris = afficher_favoris_1(&afficher_favoris_1_arg, clnt);
+	if (result_afficher_favoris == (listSerie *) NULL) {
 		clnt_perror (clnt, "Afficher Favoris call failed");
 	}
-	result_11 = supprimer_favoris_1(&supprimer_favoris_1_arg, clnt);
-	if (result_11 == (int *) NULL) {
+	result_supprimer_favoris = supprimer_favoris_1(&supprimer_favoris_1_arg, clnt);
+	if (result_supprimer_favoris == (int *) NULL) {
 		clnt_perror (clnt, "Supprimer Favoris call failed");
 	}
-	result_12 = ajouter_commentaire_1(&ajouter_commentaire_1_arg, clnt);
-	if (result_12 == (int *) NULL) {
+	result_ajouter_commentaire = ajouter_commentaire_1(&ajouter_commentaire_1_arg, clnt);
+	if (result_ajouter_commentaire == (int *) NULL) {
 		clnt_perror (clnt, "Ajouter Commentaire call failed");
 	}
-	result_13 = supprimer_commentaire_1(&supprimer_commentaire_1_arg, clnt);
-	if (result_13 == (int *) NULL) {
+	result_supprimer_commentaire = supprimer_commentaire_1(&supprimer_commentaire_1_arg, clnt);
+	if (result_supprimer_commentaire == (int *) NULL) {
 		clnt_perror (clnt, "Supprimer Commentaire call failed");
 	}
 #ifndef	DEBUG

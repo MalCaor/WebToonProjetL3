@@ -6,6 +6,9 @@
 
 #include "webtoon.h"
 
+static struct compte tabCompte[10];
+static struct serie tabSerie[10];
+
 void *
 init_1_svc(void *argp, struct svc_req *rqstp)
 {
