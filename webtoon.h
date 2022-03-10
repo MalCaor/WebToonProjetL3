@@ -13,6 +13,12 @@
 extern "C" {
 #endif
 
+struct date {
+	int jour;
+	int mois;
+	int annee;
+};
+typedef struct date date;
 
 struct commentaire {
 	char pseudo[50];
@@ -61,12 +67,7 @@ struct listSerie {
 };
 typedef struct listSerie listSerie;
 
-struct date {
-	int jour;
-	int mois;
-	int annee;
-};
-typedef struct date date;
+
 
 struct compte {
 	char pseudo[50];
