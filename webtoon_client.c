@@ -48,55 +48,55 @@ webtoon_prog_1(char *host)
 
 	result_1 = init_1((void*)&init_1_arg, clnt);
 	if (result_1 == (void *) NULL) {
-		clnt_perror (clnt, "call failed");
+		clnt_perror (clnt, "Init call failed");
 	}
 	result_2 = inscription_1(&inscription_1_arg, clnt);
 	if (result_2 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
+		clnt_perror (clnt, "Inscription call failed");
 	}
 	result_3 = maj_info_1(&maj_info_1_arg, clnt);
 	if (result_3 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
+		clnt_perror (clnt, "Maj Info call failed");
 	}
 	result_4 = afficher_serie_1(&afficher_serie_1_arg, clnt);
 	if (result_4 == (listSerie *) NULL) {
-		clnt_perror (clnt, "call failed");
+		clnt_perror (clnt, "Afficher Serie call failed");
 	}
 	result_5 = acheter_serie_1(&acheter_serie_1_arg, clnt);
 	if (result_5 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
+		clnt_perror (clnt, "Acheter Serie call failed");
 	}
 	result_6 = ajouter_note_1(&ajouter_note_1_arg, clnt);
 	if (result_6 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
+		clnt_perror (clnt, "Ajouter Note call failed");
 	}
 	result_7 = acheter_coin_1(&acheter_coin_1_arg, clnt);
 	if (result_7 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
+		clnt_perror (clnt, "Acheter Coin call failed");
 	}
 	result_8 = afficher_coin_1(&afficher_coin_1_arg, clnt);
 	if (result_8 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
+		clnt_perror (clnt, "Afficher Coincall failed");
 	}
 	result_9 = ajouter_favoris_1(&ajouter_favoris_1_arg, clnt);
 	if (result_9 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
+		clnt_perror (clnt, "Ajouter Favoris call failed");
 	}
 	result_10 = afficher_favoris_1(&afficher_favoris_1_arg, clnt);
 	if (result_10 == (listSerie *) NULL) {
-		clnt_perror (clnt, "call failed");
+		clnt_perror (clnt, "Afficher Favoris call failed");
 	}
 	result_11 = supprimer_favoris_1(&supprimer_favoris_1_arg, clnt);
 	if (result_11 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
+		clnt_perror (clnt, "Supprimer Favoris call failed");
 	}
 	result_12 = ajouter_commentaire_1(&ajouter_commentaire_1_arg, clnt);
 	if (result_12 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
+		clnt_perror (clnt, "Ajouter Commentaire call failed");
 	}
 	result_13 = supprimer_commentaire_1(&supprimer_commentaire_1_arg, clnt);
 	if (result_13 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
+		clnt_perror (clnt, "Supprimer Commentaire call failed");
 	}
 #ifndef	DEBUG
 	clnt_destroy (clnt);
