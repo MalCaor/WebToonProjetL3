@@ -70,10 +70,10 @@ webtoon_prog_1(char *host)
 	} else {
 		if (*result_inscription == 0){
 			// echec
-			printf("Inscription echec\n");
+			printf("maj_info_1 echec\n");
 		}else{
 			//echec
-			printf("Inscription reussi\n");
+			printf("maj_info_1 reussi\n");
 		}
 	}
 	result_afficher_serie = afficher_serie_1(&afficher_serie_1_arg, clnt);
@@ -86,10 +86,10 @@ webtoon_prog_1(char *host)
 	} else {
 		if (*result_inscription == 0){
 			// echec
-			printf("Inscription echec\n");
+			printf("acheter_serie_1 echec\n");
 		}else{
 			//echec
-			printf("Inscription reussi\n");
+			printf("acheter_serie_1 reussi\n");
 		}
 	}
 	result_acheter_coin = acheter_coin_1(&acheter_coin_1_arg, clnt);
@@ -98,10 +98,10 @@ webtoon_prog_1(char *host)
 	} else {
 		if (*result_inscription == 0){
 			// echec
-			printf("Inscription echec\n");
+			printf("acheter_coin_1 echec\n");
 		}else{
 			//echec
-			printf("Inscription reussi\n");
+			printf("acheter_coin_1 reussi\n");
 		}
 	}
 	result_maj_info = maj_info_1(&maj_info_1_arg, clnt);
@@ -114,10 +114,10 @@ webtoon_prog_1(char *host)
 	} else {
 		if (*result_inscription == 0){
 			// echec
-			printf("Inscription echec\n");
+			printf("acheter_coin_1 echec\n");
 		}else{
 			//echec
-			printf("Inscription reussi\n");
+			printf("acheter_coin_1 reussi\n");
 		}
 	}
 	result_afficher_coin = afficher_coin_1(&afficher_coin_1_arg, clnt);
@@ -130,10 +130,10 @@ webtoon_prog_1(char *host)
 	} else {
 		if (*result_inscription == 0){
 			// echec
-			printf("Inscription echec\n");
+			printf("ajouter_favoris_1 echec\n");
 		}else{
 			//echec
-			printf("Inscription reussi\n");
+			printf("ajouter_favoris_1 reussi\n");
 		}
 	}
 	result_afficher_favoris = afficher_favoris_1(&afficher_favoris_1_arg, clnt);
@@ -146,10 +146,10 @@ webtoon_prog_1(char *host)
 	} else {
 		if (*result_inscription == 0){
 			// echec
-			printf("Inscription echec\n");
+			printf("ajouter_commentaire_1 echec\n");
 		}else{
 			//echec
-			printf("Inscription reussi\n");
+			printf("ajouter_commentaire_1 reussi\n");
 		}
 	}
 	result_ajouter_note = ajouter_note_1(&ajouter_note_1_arg, clnt);
@@ -158,10 +158,10 @@ webtoon_prog_1(char *host)
 	} else {
 		if (*result_inscription == 0){
 			// echec
-			printf("Inscription echec\n");
+			printf("ajouter_note_1 echec\n");
 		}else{
 			//echec
-			printf("Inscription reussi\n");
+			printf("ajouter_note_1 reussi\n");
 		}
 	}
 	result_supprimer_favoris = supprimer_favoris_1(&supprimer_favoris_1_arg, clnt);
@@ -170,10 +170,10 @@ webtoon_prog_1(char *host)
 	} else {
 		if (*result_inscription == 0){
 			// echec
-			printf("Inscription echec\n");
+			printf("supprimer_favoris_1 echec\n");
 		}else{
 			//echec
-			printf("Inscription reussi\n");
+			printf("supprimer_favoris_1 reussi\n");
 		}
 	}
 	result_supprimer_commentaire = supprimer_commentaire_1(&supprimer_commentaire_1_arg, clnt);
@@ -182,10 +182,10 @@ webtoon_prog_1(char *host)
 	} else {
 		if (*result_inscription == 0){
 			// echec
-			printf("Inscription echec\n");
+			printf("supprimer_commentaire_1 echec\n");
 		}else{
 			//echec
-			printf("Inscription reussi\n");
+			printf("supprimer_commentaire_1 reussi\n");
 		}
 	}
 
