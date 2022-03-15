@@ -11,11 +11,25 @@ xdr_commentaire (XDR *xdrs, commentaire *objp)
 	register int32_t *buf;
 
 	int i;
-	 if (!xdr_vector (xdrs, (char *)objp->pseudo, 50,
+	 if (!xdr_vector (xdrs, (char *)objp->pseudo, 15,
 		sizeof (char), (xdrproc_t) xdr_char))
 		 return FALSE;
-	 if (!xdr_vector (xdrs, (char *)objp->comm, 255,
+	 if (!xdr_vector (xdrs, (char *)objp->comm, 15,
 		sizeof (char), (xdrproc_t) xdr_char))
+		 return FALSE;
+	return TRUE;
+}
+
+bool_t
+xdr_date (XDR *xdrs, date *objp)
+{
+	register int32_t *buf;
+
+	 if (!xdr_int (xdrs, &objp->jour))
+		 return FALSE;
+	 if (!xdr_int (xdrs, &objp->mois))
+		 return FALSE;
+	 if (!xdr_int (xdrs, &objp->annee))
 		 return FALSE;
 	return TRUE;
 }
@@ -26,7 +40,7 @@ xdr_genre (XDR *xdrs, genre *objp)
 	register int32_t *buf;
 
 	int i;
-	 if (!xdr_vector (xdrs, (char *)objp->nomGenre, 50,
+	 if (!xdr_vector (xdrs, (char *)objp->nomGenre, 15,
 		sizeof (char), (xdrproc_t) xdr_char))
 		 return FALSE;
 	return TRUE;
@@ -38,12 +52,12 @@ xdr_serie (XDR *xdrs, serie *objp)
 	register int32_t *buf;
 
 	int i;
-	 if (!xdr_vector (xdrs, (char *)objp->titre, 100,
+	 if (!xdr_vector (xdrs, (char *)objp->titre, 15,
 		sizeof (char), (xdrproc_t) xdr_char))
 		 return FALSE;
 	 if (!xdr_double (xdrs, &objp->noteMoyenne))
 		 return FALSE;
-	 if (!xdr_vector (xdrs, (char *)objp->listGenre, 10,
+	 if (!xdr_vector (xdrs, (char *)objp->listGenre, 15,
 		sizeof (genre), (xdrproc_t) xdr_genre))
 		 return FALSE;
 	 if (!xdr_date (xdrs, &objp->dateSerie))
@@ -105,22 +119,8 @@ xdr_listSerie (XDR *xdrs, listSerie *objp)
 	int i;
 	 if (!xdr_int (xdrs, &objp->nbSerie))
 		 return FALSE;
-	 if (!xdr_vector (xdrs, (char *)objp->listSerie, 50,
+	 if (!xdr_vector (xdrs, (char *)objp->listSerie, 15,
 		sizeof (serie), (xdrproc_t) xdr_serie))
-		 return FALSE;
-	return TRUE;
-}
-
-bool_t
-xdr_date (XDR *xdrs, date *objp)
-{
-	register int32_t *buf;
-
-	 if (!xdr_int (xdrs, &objp->jour))
-		 return FALSE;
-	 if (!xdr_int (xdrs, &objp->mois))
-		 return FALSE;
-	 if (!xdr_int (xdrs, &objp->annee))
 		 return FALSE;
 	return TRUE;
 }
@@ -131,77 +131,15 @@ xdr_compte (XDR *xdrs, compte *objp)
 	register int32_t *buf;
 
 	int i;
-
-	if (xdrs->x_op == XDR_ENCODE) {
-		 if (!xdr_vector (xdrs, (char *)objp->pseudo, 50,
-			sizeof (char), (xdrproc_t) xdr_char))
-			 return FALSE;
-		 if (!xdr_vector (xdrs, (char *)objp->mdp, 50,
-			sizeof (char), (xdrproc_t) xdr_char))
-			 return FALSE;
-		buf = XDR_INLINE (xdrs, ( 16 ) * BYTES_PER_XDR_UNIT);
-		if (buf == NULL) {
-			 if (!xdr_vector (xdrs, (char *)objp->carteBancaire, 16,
-				sizeof (int), (xdrproc_t) xdr_int))
-				 return FALSE;
-
-		} else {
-		{
-			register int *genp;
-
-			for (i = 0, genp = objp->carteBancaire;
-				i < 16; ++i) {
-				IXDR_PUT_LONG(buf, *genp++);
-			}
-		}
-		}
-		 if (!xdr_vector (xdrs, (char *)objp->serieFavorite, 50,
-			sizeof (serie), (xdrproc_t) xdr_serie))
-			 return FALSE;
-		 if (!xdr_int (xdrs, &objp->coin))
-			 return FALSE;
-		return TRUE;
-	} else if (xdrs->x_op == XDR_DECODE) {
-		 if (!xdr_vector (xdrs, (char *)objp->pseudo, 50,
-			sizeof (char), (xdrproc_t) xdr_char))
-			 return FALSE;
-		 if (!xdr_vector (xdrs, (char *)objp->mdp, 50,
-			sizeof (char), (xdrproc_t) xdr_char))
-			 return FALSE;
-		buf = XDR_INLINE (xdrs, ( 16 ) * BYTES_PER_XDR_UNIT);
-		if (buf == NULL) {
-			 if (!xdr_vector (xdrs, (char *)objp->carteBancaire, 16,
-				sizeof (int), (xdrproc_t) xdr_int))
-				 return FALSE;
-
-		} else {
-		{
-			register int *genp;
-
-			for (i = 0, genp = objp->carteBancaire;
-				i < 16; ++i) {
-				*genp++ = IXDR_GET_LONG(buf);
-			}
-		}
-		}
-		 if (!xdr_vector (xdrs, (char *)objp->serieFavorite, 50,
-			sizeof (serie), (xdrproc_t) xdr_serie))
-			 return FALSE;
-		 if (!xdr_int (xdrs, &objp->coin))
-			 return FALSE;
-	 return TRUE;
-	}
-
-	 if (!xdr_vector (xdrs, (char *)objp->pseudo, 50,
+	 if (!xdr_vector (xdrs, (char *)objp->pseudo, 15,
 		sizeof (char), (xdrproc_t) xdr_char))
 		 return FALSE;
-	 if (!xdr_vector (xdrs, (char *)objp->mdp, 50,
+	 if (!xdr_vector (xdrs, (char *)objp->mdp, 15,
 		sizeof (char), (xdrproc_t) xdr_char))
 		 return FALSE;
-	 if (!xdr_vector (xdrs, (char *)objp->carteBancaire, 16,
-		sizeof (int), (xdrproc_t) xdr_int))
+	 if (!xdr_int (xdrs, &objp->carteBancaire))
 		 return FALSE;
-	 if (!xdr_vector (xdrs, (char *)objp->serieFavorite, 50,
+	 if (!xdr_vector (xdrs, (char *)objp->serieFavorite, 15,
 		sizeof (serie), (xdrproc_t) xdr_serie))
 		 return FALSE;
 	 if (!xdr_int (xdrs, &objp->coin))

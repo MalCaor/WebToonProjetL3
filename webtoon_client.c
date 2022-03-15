@@ -52,6 +52,11 @@ webtoon_prog_1(char *host)
 	} else {
 		printf("Initialisation termine\n");
 	}
+	
+	strcpy(inscription_1_arg.pseudo,"Le Narrateur");
+	strcpy(inscription_1_arg.mdp,"1234");
+	inscription_1_arg.carteBancaire=0;
+	inscription_1_arg.coin=0;
 	result_inscription = inscription_1(&inscription_1_arg, clnt);
 	if (result_inscription == (int *) NULL) {
 		clnt_perror (clnt, "Inscription call failed");
@@ -63,7 +68,7 @@ webtoon_prog_1(char *host)
 			//echec
 			printf("Inscription reussi\n");
 		}
-	}
+	}/*
 	result_maj_info = maj_info_1(&maj_info_1_arg, clnt);
 	if (result_maj_info == (int *) NULL) {
 		clnt_perror (clnt, "Maj Info call failed");
@@ -187,13 +192,8 @@ webtoon_prog_1(char *host)
 			//echec
 			printf("supprimer_commentaire_1 reussi\n");
 		}
-	}
+	}*/
 
-
-
-
-
-	
 #ifndef	DEBUG
 	clnt_destroy (clnt);
 #endif	 /* DEBUG */

@@ -13,6 +13,13 @@
 extern "C" {
 #endif
 
+
+struct commentaire {
+	char pseudo[15];
+	char comm[15];
+};
+typedef struct commentaire commentaire;
+
 struct date {
 	int jour;
 	int mois;
@@ -20,26 +27,20 @@ struct date {
 };
 typedef struct date date;
 
-struct commentaire {
-	char pseudo[50];
-	char comm[255];
-};
-typedef struct commentaire commentaire;
-
 struct genre {
-	char nomGenre[50];
+	char nomGenre[15];
 };
 typedef struct genre genre;
 
 struct serie {
-	char titre[100];
+	char titre[15];
 	double noteMoyenne;
-	genre listGenre[10];
+	genre listGenre[15];
 	date dateSerie;
 	commentaire listComm[15];
 	int nbrVue;
 	int nbEpisode;
-	char description[255];
+	char description[15];
 };
 typedef struct serie serie;
 
@@ -63,17 +64,15 @@ typedef struct argTri argTri;
 
 struct listSerie {
 	int nbSerie;
-	serie listSerie[50];
+	serie listSerie[15];
 };
 typedef struct listSerie listSerie;
 
-
-
 struct compte {
-	char pseudo[50];
-	char mdp[50];
-	int carteBancaire[16];
-	serie serieFavorite[50];
+	char pseudo[15];
+	char mdp[15];
+	int carteBancaire;
+	serie serieFavorite[15];
 	int coin;
 };
 typedef struct compte compte;
@@ -182,26 +181,26 @@ extern int webtoon_prog_1_freeresult ();
 
 #if defined(__STDC__) || defined(__cplusplus)
 extern  bool_t xdr_commentaire (XDR *, commentaire*);
+extern  bool_t xdr_date (XDR *, date*);
 extern  bool_t xdr_genre (XDR *, genre*);
 extern  bool_t xdr_serie (XDR *, serie*);
 extern  bool_t xdr_argAjoutComm (XDR *, argAjoutComm*);
 extern  bool_t xdr_argAjouterNote (XDR *, argAjouterNote*);
 extern  bool_t xdr_argTri (XDR *, argTri*);
 extern  bool_t xdr_listSerie (XDR *, listSerie*);
-extern  bool_t xdr_date (XDR *, date*);
 extern  bool_t xdr_compte (XDR *, compte*);
 extern  bool_t xdr_argAchaCoin (XDR *, argAchaCoin*);
 extern  bool_t xdr_argAchaSerie (XDR *, argAchaSerie*);
 
 #else /* K&R C */
 extern bool_t xdr_commentaire ();
+extern bool_t xdr_date ();
 extern bool_t xdr_genre ();
 extern bool_t xdr_serie ();
 extern bool_t xdr_argAjoutComm ();
 extern bool_t xdr_argAjouterNote ();
 extern bool_t xdr_argTri ();
 extern bool_t xdr_listSerie ();
-extern bool_t xdr_date ();
 extern bool_t xdr_compte ();
 extern bool_t xdr_argAchaCoin ();
 extern bool_t xdr_argAchaSerie ();

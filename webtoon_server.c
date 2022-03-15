@@ -7,6 +7,7 @@
 #include "webtoon.h"
 
 static struct compte tabCompte[10];
+static int nbCompte = 0;
 static struct serie tabSerie[10];
 
 void *
@@ -15,15 +16,26 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	static char * result;
 
 	struct serie s1;
-	strcpy(s1.titre, "Comment je suis devenu un hero alors que j'étais un looser");
+	strcpy(s1.titre, "Le Hero");
 	s1.noteMoyenne;
-	strcpy(s1.listGenre[0].nomGenre,"Humour");strcpy(s1.listGenre[0].nomGenre,"Action");
+	strcpy(s1.listGenre[0].nomGenre,"Humour");strcpy(s1.listGenre[1].nomGenre,"Action");
 	s1.dateSerie.jour=10; s1.dateSerie.mois=1; s1.dateSerie.annee=2020;
-	strcpy(s1.listComm[0].comm,"Sympa"); strcpy(s1.listComm[0].pseudo,"Pseudo 1"); 
-	strcpy(s1.listComm[1].comm,"Bof deja vu"); strcpy(s1.listComm[1].pseudo,"Pseudo 2"); 
+	strcpy(s1.listComm[0].comm,"Sympa"); strcpy(s1.listComm[0].pseudo,"Le Narrateur"); 
+	strcpy(s1.listComm[1].comm,"Bof deja vu"); strcpy(s1.listComm[1].pseudo,"Malcaor"); 
 	s1.nbrVue=10;
 	s1.nbEpisode=3;
-	strcpy(s1.description, "Une aventure incroyable dans un monde parellele apres avoir été renversé par un tricycle");
+	strcpy(s1.description, "Une aventure");
+
+	struct serie s2;
+	strcpy(s2.titre, "L'enfermation");
+	s2.noteMoyenne;
+	strcpy(s2.listGenre[0].nomGenre,"Humour");strcpy(s2.listGenre[1].nomGenre,"Slice of Life");
+	s2.dateSerie.jour=10; s2.dateSerie.mois=1; s2.dateSerie.annee=2020;
+	strcpy(s2.listComm[0].comm,"lol"); strcpy(s2.listComm[0].pseudo,"Le Narrateur"); 
+	strcpy(s2.listComm[1].comm,"Je pleurais"); strcpy(s2.listComm[1].pseudo,"Malcaor"); 
+	s2.nbrVue=10;
+	s2.nbEpisode=3;
+	strcpy(s2.description, "Cela fait 3 mois, ma famille s'inquiete, je mange du pain rassis, la police ne viens toujours pas. A l'aide.\n");
 
 	return (void *) &result;
 }
@@ -33,10 +45,16 @@ inscription_1_svc(compte *argp, struct svc_req *rqstp)
 {
 	static int  result;
 
-	/*
-	 * insert server code here
-	 */
-
+	struct compte *c = (struct compte *) malloc(sizeof(struct compte));
+	strcpy(c->pseudo, argp->pseudo);
+	strcpy(c->mdp,argp->mdp);
+	if(argp->carteBancaire>0){
+		c->carteBancaire = argp->carteBancaire;		
+	}
+	c->coin = argp->coin;
+	tabCompte[nbCompte] = *c;
+	if(&tabCompte[nbCompte] != NULL){result=1;nbCompte++;}else{result=0;}
+	
 	return &result;
 }
 
