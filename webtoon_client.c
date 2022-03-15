@@ -78,14 +78,6 @@ webtoon_prog_1(char *host)
 	if (result_acheter_coin == (int *) NULL) {
 		clnt_perror (clnt, "Acheter Coin call failed");
 	}
-
-
-
-
-	result_ajouter_note = ajouter_note_1(&ajouter_note_1_arg, clnt);
-	if (result_ajouter_note == (int *) NULL) {
-		clnt_perror (clnt, "Ajouter Note call failed");
-	}
 	result_afficher_coin = afficher_coin_1(&afficher_coin_1_arg, clnt);
 	if (result_afficher_coin == (int *) NULL) {
 		clnt_perror (clnt, "Afficher Coincall failed");
@@ -98,18 +90,28 @@ webtoon_prog_1(char *host)
 	if (result_afficher_favoris == (listSerie *) NULL) {
 		clnt_perror (clnt, "Afficher Favoris call failed");
 	}
-	result_supprimer_favoris = supprimer_favoris_1(&supprimer_favoris_1_arg, clnt);
-	if (result_supprimer_favoris == (int *) NULL) {
-		clnt_perror (clnt, "Supprimer Favoris call failed");
-	}
 	result_ajouter_commentaire = ajouter_commentaire_1(&ajouter_commentaire_1_arg, clnt);
 	if (result_ajouter_commentaire == (int *) NULL) {
 		clnt_perror (clnt, "Ajouter Commentaire call failed");
+	}
+	result_ajouter_note = ajouter_note_1(&ajouter_note_1_arg, clnt);
+	if (result_ajouter_note == (int *) NULL) {
+		clnt_perror (clnt, "Ajouter Note call failed");
+	}
+	result_supprimer_favoris = supprimer_favoris_1(&supprimer_favoris_1_arg, clnt);
+	if (result_supprimer_favoris == (int *) NULL) {
+		clnt_perror (clnt, "Supprimer Favoris call failed");
 	}
 	result_supprimer_commentaire = supprimer_commentaire_1(&supprimer_commentaire_1_arg, clnt);
 	if (result_supprimer_commentaire == (int *) NULL) {
 		clnt_perror (clnt, "Supprimer Commentaire call failed");
 	}
+
+
+
+
+
+	
 #ifndef	DEBUG
 	clnt_destroy (clnt);
 #endif	 /* DEBUG */
