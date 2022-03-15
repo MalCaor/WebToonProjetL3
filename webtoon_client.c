@@ -49,14 +49,32 @@ webtoon_prog_1(char *host)
 	result_init = init_1((void*)&init_1_arg, clnt);
 	if (result_init == (void *) NULL) {
 		clnt_perror (clnt, "Init call failed");
+	} else {
+		printf("Initialisation termine\n");
 	}
 	result_inscription = inscription_1(&inscription_1_arg, clnt);
 	if (result_inscription == (int *) NULL) {
 		clnt_perror (clnt, "Inscription call failed");
+	} else {
+		if (*result_inscription == 0){
+			// echec
+			printf("Inscription echec\n");
+		}else{
+			//echec
+			printf("Inscription reussi\n");
+		}
 	}
 	result_maj_info = maj_info_1(&maj_info_1_arg, clnt);
 	if (result_maj_info == (int *) NULL) {
 		clnt_perror (clnt, "Maj Info call failed");
+	} else {
+		if (*result_inscription == 0){
+			// echec
+			printf("Inscription echec\n");
+		}else{
+			//echec
+			printf("Inscription reussi\n");
+		}
 	}
 	result_afficher_serie = afficher_serie_1(&afficher_serie_1_arg, clnt);
 	if (result_afficher_serie == (listSerie *) NULL) {
@@ -65,10 +83,26 @@ webtoon_prog_1(char *host)
 	result_acheter_serie = acheter_serie_1(&acheter_serie_1_arg, clnt);
 	if (result_acheter_serie == (int *) NULL) {
 		clnt_perror (clnt, "Acheter Serie call failed");
+	} else {
+		if (*result_inscription == 0){
+			// echec
+			printf("Inscription echec\n");
+		}else{
+			//echec
+			printf("Inscription reussi\n");
+		}
 	}
 	result_acheter_coin = acheter_coin_1(&acheter_coin_1_arg, clnt);
 	if (result_acheter_coin == (int *) NULL) {
 		clnt_perror (clnt, "Acheter Coin call failed");
+	} else {
+		if (*result_inscription == 0){
+			// echec
+			printf("Inscription echec\n");
+		}else{
+			//echec
+			printf("Inscription reussi\n");
+		}
 	}
 	result_maj_info = maj_info_1(&maj_info_1_arg, clnt);
 	if (result_maj_info == (int *) NULL) {
@@ -77,6 +111,14 @@ webtoon_prog_1(char *host)
 	result_acheter_coin = acheter_coin_1(&acheter_coin_1_arg, clnt);
 	if (result_acheter_coin == (int *) NULL) {
 		clnt_perror (clnt, "Acheter Coin call failed");
+	} else {
+		if (*result_inscription == 0){
+			// echec
+			printf("Inscription echec\n");
+		}else{
+			//echec
+			printf("Inscription reussi\n");
+		}
 	}
 	result_afficher_coin = afficher_coin_1(&afficher_coin_1_arg, clnt);
 	if (result_afficher_coin == (int *) NULL) {
@@ -85,6 +127,14 @@ webtoon_prog_1(char *host)
 	result_ajouter_favoris = ajouter_favoris_1(&ajouter_favoris_1_arg, clnt);
 	if (result_ajouter_favoris == (int *) NULL) {
 		clnt_perror (clnt, "Ajouter Favoris call failed");
+	} else {
+		if (*result_inscription == 0){
+			// echec
+			printf("Inscription echec\n");
+		}else{
+			//echec
+			printf("Inscription reussi\n");
+		}
 	}
 	result_afficher_favoris = afficher_favoris_1(&afficher_favoris_1_arg, clnt);
 	if (result_afficher_favoris == (listSerie *) NULL) {
@@ -93,18 +143,50 @@ webtoon_prog_1(char *host)
 	result_ajouter_commentaire = ajouter_commentaire_1(&ajouter_commentaire_1_arg, clnt);
 	if (result_ajouter_commentaire == (int *) NULL) {
 		clnt_perror (clnt, "Ajouter Commentaire call failed");
+	} else {
+		if (*result_inscription == 0){
+			// echec
+			printf("Inscription echec\n");
+		}else{
+			//echec
+			printf("Inscription reussi\n");
+		}
 	}
 	result_ajouter_note = ajouter_note_1(&ajouter_note_1_arg, clnt);
 	if (result_ajouter_note == (int *) NULL) {
 		clnt_perror (clnt, "Ajouter Note call failed");
+	} else {
+		if (*result_inscription == 0){
+			// echec
+			printf("Inscription echec\n");
+		}else{
+			//echec
+			printf("Inscription reussi\n");
+		}
 	}
 	result_supprimer_favoris = supprimer_favoris_1(&supprimer_favoris_1_arg, clnt);
 	if (result_supprimer_favoris == (int *) NULL) {
 		clnt_perror (clnt, "Supprimer Favoris call failed");
+	} else {
+		if (*result_inscription == 0){
+			// echec
+			printf("Inscription echec\n");
+		}else{
+			//echec
+			printf("Inscription reussi\n");
+		}
 	}
 	result_supprimer_commentaire = supprimer_commentaire_1(&supprimer_commentaire_1_arg, clnt);
 	if (result_supprimer_commentaire == (int *) NULL) {
 		clnt_perror (clnt, "Supprimer Commentaire call failed");
+	} else {
+		if (*result_inscription == 0){
+			// echec
+			printf("Inscription echec\n");
+		}else{
+			//echec
+			printf("Inscription reussi\n");
+		}
 	}
 
 
