@@ -28,14 +28,16 @@ struct date {
 typedef struct date date;
 
 struct genre {
+	int idGenre;
 	char nomGenre[15];
 };
 typedef struct genre genre;
 
 struct serie {
+	int idSerie;
 	char titre[15];
 	double noteMoyenne;
-	genre listGenre[15];
+	int listGenre[15];
 	date dateSerie;
 	commentaire listComm[15];
 	int nbrVue;
@@ -72,7 +74,7 @@ struct compte {
 	char pseudo[15];
 	char mdp[15];
 	int carteBancaire;
-	serie serieFavorite[15];
+	int serieFavorite[15];
 	int coin;
 };
 typedef struct compte compte;

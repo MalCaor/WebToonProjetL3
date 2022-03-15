@@ -18,7 +18,7 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	struct serie s1;
 	strcpy(s1.titre, "Le Hero");
 	s1.noteMoyenne;
-	strcpy(s1.listGenre[0].nomGenre,"Humour");strcpy(s1.listGenre[1].nomGenre,"Action");
+	s1.listGenre[0]=1;s1.listGenre[1]=3;
 	s1.dateSerie.jour=10; s1.dateSerie.mois=1; s1.dateSerie.annee=2020;
 	strcpy(s1.listComm[0].comm,"Sympa"); strcpy(s1.listComm[0].pseudo,"Le Narrateur"); 
 	strcpy(s1.listComm[1].comm,"Bof deja vu"); strcpy(s1.listComm[1].pseudo,"Malcaor"); 
@@ -29,7 +29,7 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	struct serie s2;
 	strcpy(s2.titre, "L'enfermation");
 	s2.noteMoyenne;
-	strcpy(s2.listGenre[0].nomGenre,"Humour");strcpy(s2.listGenre[1].nomGenre,"Slice of Life");
+	s2.listGenre[0]=1;s2.listGenre[1]=2;
 	s2.dateSerie.jour=10; s2.dateSerie.mois=1; s2.dateSerie.annee=2020;
 	strcpy(s2.listComm[0].comm,"lol"); strcpy(s2.listComm[0].pseudo,"Le Narrateur"); 
 	strcpy(s2.listComm[1].comm,"Je pleurais"); strcpy(s2.listComm[1].pseudo,"Malcaor"); 
@@ -44,7 +44,7 @@ int *
 inscription_1_svc(compte *argp, struct svc_req *rqstp)
 {
 	static int  result;
-
+	struct serie s[15];
 	struct compte *c = (struct compte *) malloc(sizeof(struct compte));
 	strcpy(c->pseudo, argp->pseudo);
 	strcpy(c->mdp,argp->mdp);
@@ -52,6 +52,7 @@ inscription_1_svc(compte *argp, struct svc_req *rqstp)
 		c->carteBancaire = argp->carteBancaire;		
 	}
 	c->coin = argp->coin;
+	
 	tabCompte[nbCompte] = *c;
 	if(&tabCompte[nbCompte] != NULL){result=1;nbCompte++;}else{result=0;}
 	

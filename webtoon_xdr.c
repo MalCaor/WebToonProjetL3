@@ -40,6 +40,8 @@ xdr_genre (XDR *xdrs, genre *objp)
 	register int32_t *buf;
 
 	int i;
+	 if (!xdr_int (xdrs, &objp->idGenre))
+		 return FALSE;
 	 if (!xdr_vector (xdrs, (char *)objp->nomGenre, 15,
 		sizeof (char), (xdrproc_t) xdr_char))
 		 return FALSE;
@@ -52,13 +54,92 @@ xdr_serie (XDR *xdrs, serie *objp)
 	register int32_t *buf;
 
 	int i;
+
+	if (xdrs->x_op == XDR_ENCODE) {
+		 if (!xdr_int (xdrs, &objp->idSerie))
+			 return FALSE;
+		 if (!xdr_vector (xdrs, (char *)objp->titre, 15,
+			sizeof (char), (xdrproc_t) xdr_char))
+			 return FALSE;
+		 if (!xdr_double (xdrs, &objp->noteMoyenne))
+			 return FALSE;
+		buf = XDR_INLINE (xdrs, ( 15 ) * BYTES_PER_XDR_UNIT);
+		if (buf == NULL) {
+			 if (!xdr_vector (xdrs, (char *)objp->listGenre, 15,
+				sizeof (int), (xdrproc_t) xdr_int))
+				 return FALSE;
+
+		} else {
+		{
+			register int *genp;
+
+			for (i = 0, genp = objp->listGenre;
+				i < 15; ++i) {
+				IXDR_PUT_LONG(buf, *genp++);
+			}
+		}
+		}
+		 if (!xdr_date (xdrs, &objp->dateSerie))
+			 return FALSE;
+		 if (!xdr_vector (xdrs, (char *)objp->listComm, 15,
+			sizeof (commentaire), (xdrproc_t) xdr_commentaire))
+			 return FALSE;
+		 if (!xdr_int (xdrs, &objp->nbrVue))
+			 return FALSE;
+		 if (!xdr_int (xdrs, &objp->nbEpisode))
+			 return FALSE;
+		 if (!xdr_vector (xdrs, (char *)objp->description, 15,
+			sizeof (char), (xdrproc_t) xdr_char))
+			 return FALSE;
+		return TRUE;
+	} else if (xdrs->x_op == XDR_DECODE) {
+		 if (!xdr_int (xdrs, &objp->idSerie))
+			 return FALSE;
+		 if (!xdr_vector (xdrs, (char *)objp->titre, 15,
+			sizeof (char), (xdrproc_t) xdr_char))
+			 return FALSE;
+		 if (!xdr_double (xdrs, &objp->noteMoyenne))
+			 return FALSE;
+		buf = XDR_INLINE (xdrs, ( 15 ) * BYTES_PER_XDR_UNIT);
+		if (buf == NULL) {
+			 if (!xdr_vector (xdrs, (char *)objp->listGenre, 15,
+				sizeof (int), (xdrproc_t) xdr_int))
+				 return FALSE;
+
+		} else {
+		{
+			register int *genp;
+
+			for (i = 0, genp = objp->listGenre;
+				i < 15; ++i) {
+				*genp++ = IXDR_GET_LONG(buf);
+			}
+		}
+		}
+		 if (!xdr_date (xdrs, &objp->dateSerie))
+			 return FALSE;
+		 if (!xdr_vector (xdrs, (char *)objp->listComm, 15,
+			sizeof (commentaire), (xdrproc_t) xdr_commentaire))
+			 return FALSE;
+		 if (!xdr_int (xdrs, &objp->nbrVue))
+			 return FALSE;
+		 if (!xdr_int (xdrs, &objp->nbEpisode))
+			 return FALSE;
+		 if (!xdr_vector (xdrs, (char *)objp->description, 15,
+			sizeof (char), (xdrproc_t) xdr_char))
+			 return FALSE;
+	 return TRUE;
+	}
+
+	 if (!xdr_int (xdrs, &objp->idSerie))
+		 return FALSE;
 	 if (!xdr_vector (xdrs, (char *)objp->titre, 15,
 		sizeof (char), (xdrproc_t) xdr_char))
 		 return FALSE;
 	 if (!xdr_double (xdrs, &objp->noteMoyenne))
 		 return FALSE;
 	 if (!xdr_vector (xdrs, (char *)objp->listGenre, 15,
-		sizeof (genre), (xdrproc_t) xdr_genre))
+		sizeof (int), (xdrproc_t) xdr_int))
 		 return FALSE;
 	 if (!xdr_date (xdrs, &objp->dateSerie))
 		 return FALSE;
@@ -69,7 +150,7 @@ xdr_serie (XDR *xdrs, serie *objp)
 		 return FALSE;
 	 if (!xdr_int (xdrs, &objp->nbEpisode))
 		 return FALSE;
-	 if (!xdr_vector (xdrs, (char *)objp->description, 255,
+	 if (!xdr_vector (xdrs, (char *)objp->description, 15,
 		sizeof (char), (xdrproc_t) xdr_char))
 		 return FALSE;
 	return TRUE;
@@ -131,6 +212,67 @@ xdr_compte (XDR *xdrs, compte *objp)
 	register int32_t *buf;
 
 	int i;
+
+	if (xdrs->x_op == XDR_ENCODE) {
+		 if (!xdr_vector (xdrs, (char *)objp->pseudo, 15,
+			sizeof (char), (xdrproc_t) xdr_char))
+			 return FALSE;
+		 if (!xdr_vector (xdrs, (char *)objp->mdp, 15,
+			sizeof (char), (xdrproc_t) xdr_char))
+			 return FALSE;
+		buf = XDR_INLINE (xdrs, (2 +  15 )* BYTES_PER_XDR_UNIT);
+		if (buf == NULL) {
+			 if (!xdr_int (xdrs, &objp->carteBancaire))
+				 return FALSE;
+			 if (!xdr_vector (xdrs, (char *)objp->serieFavorite, 15,
+				sizeof (int), (xdrproc_t) xdr_int))
+				 return FALSE;
+			 if (!xdr_int (xdrs, &objp->coin))
+				 return FALSE;
+		} else {
+			IXDR_PUT_LONG(buf, objp->carteBancaire);
+			{
+				register int *genp;
+
+				for (i = 0, genp = objp->serieFavorite;
+					i < 15; ++i) {
+					IXDR_PUT_LONG(buf, *genp++);
+				}
+			}
+			IXDR_PUT_LONG(buf, objp->coin);
+		}
+		return TRUE;
+	} else if (xdrs->x_op == XDR_DECODE) {
+		 if (!xdr_vector (xdrs, (char *)objp->pseudo, 15,
+			sizeof (char), (xdrproc_t) xdr_char))
+			 return FALSE;
+		 if (!xdr_vector (xdrs, (char *)objp->mdp, 15,
+			sizeof (char), (xdrproc_t) xdr_char))
+			 return FALSE;
+		buf = XDR_INLINE (xdrs, (2 +  15 )* BYTES_PER_XDR_UNIT);
+		if (buf == NULL) {
+			 if (!xdr_int (xdrs, &objp->carteBancaire))
+				 return FALSE;
+			 if (!xdr_vector (xdrs, (char *)objp->serieFavorite, 15,
+				sizeof (int), (xdrproc_t) xdr_int))
+				 return FALSE;
+			 if (!xdr_int (xdrs, &objp->coin))
+				 return FALSE;
+		} else {
+			objp->carteBancaire = IXDR_GET_LONG(buf);
+			{
+				register int *genp;
+
+				for (i = 0, genp = objp->serieFavorite;
+					i < 15; ++i) {
+					*genp++ = IXDR_GET_LONG(buf);
+				}
+			}
+			objp->coin = IXDR_GET_LONG(buf);
+		}
+	 return TRUE;
+	}
+
 	 if (!xdr_vector (xdrs, (char *)objp->pseudo, 15,
 		sizeof (char), (xdrproc_t) xdr_char))
 		 return FALSE;
@@ -140,7 +282,7 @@ xdr_compte (XDR *xdrs, compte *objp)
 	 if (!xdr_int (xdrs, &objp->carteBancaire))
 		 return FALSE;
 	 if (!xdr_vector (xdrs, (char *)objp->serieFavorite, 15,
-		sizeof (serie), (xdrproc_t) xdr_serie))
+		sizeof (int), (xdrproc_t) xdr_int))
 		 return FALSE;
 	 if (!xdr_int (xdrs, &objp->coin))
 		 return FALSE;
