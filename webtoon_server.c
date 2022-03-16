@@ -62,11 +62,15 @@ inscription_1_svc(compte *argp, struct svc_req *rqstp)
 int *
 maj_info_1_svc(compte *argp, struct svc_req *rqstp)
 {
-	static int  result;
+	static int  result = 0;
 
-	/*
-	 * insert server code here
-	 */
+	for(int i=0;i<nbCompte;i++){
+		if(strcmp(argp->pseudo,tabCompte[i].pseudo)==0){
+			tabCompte[i].carteBancaire = argp->carteBancaire;
+			strcpy(tabCompte[i].mdp, argp->mdp);
+			result = 1;
+		}
+	}
 
 	return &result;
 }
@@ -76,9 +80,7 @@ afficher_serie_1_svc(argTri *argp, struct svc_req *rqstp)
 {
 	static listSerie  result;
 
-	/*
-	 * insert server code here
-	 */
+	
 
 	return &result;
 }
