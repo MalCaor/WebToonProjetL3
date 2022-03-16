@@ -87,8 +87,8 @@ webtoon_prog_1(char *host)
 		}
 	}
 	
-	strcpy(&afficher_serie_1_arg.genreChoisi, "humour");
-	afficher_serie_1_arg.tri = 1;
+	strcpy(afficher_serie_1_arg.genreChoisi.nomGenre, "humour");
+	*afficher_serie_1_arg.genreChoisi.nomGenre = 1;
 	result_afficher_serie = afficher_serie_1(&afficher_serie_1_arg, clnt);
 	if (result_afficher_serie == (listSerie *) NULL) {
 		clnt_perror (clnt, "Afficher Serie call failed");
@@ -101,6 +101,7 @@ webtoon_prog_1(char *host)
 			}
 		}
 	}
+	
 	/*
 	result_acheter_serie = acheter_serie_1(&acheter_serie_1_arg, clnt);
 	if (result_acheter_serie == (int *) NULL) {
