@@ -48,7 +48,7 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 int *
 inscription_1_svc(compte *argp, struct svc_req *rqstp)
 {
-	printf("+++ Add User +++\n");
+	printf("+++ Start Add User +++\n");
 	static int  result;
 	struct serie s[15];
 	struct compte *c = (struct compte *) malloc(sizeof(struct compte));
@@ -74,16 +74,22 @@ inscription_1_svc(compte *argp, struct svc_req *rqstp)
 int *
 maj_info_1_svc(compte *argp, struct svc_req *rqstp)
 {
+	printf("+++ Start Maj Info +++\n");
 	static int  result = 0;
 
 	for(int i=0;i<nbCompte;i++){
 		if(strcmp(argp->pseudo,tabCompte[i].pseudo)==0){
+			printf("- carte bancaire : %i => ", tabCompte[i].carteBancaire);
 			tabCompte[i].carteBancaire = argp->carteBancaire;
+			printf("%i\n", tabCompte[i].carteBancaire);
+			printf("- mdp : %s => ", tabCompte[i].mdp);
 			strcpy(tabCompte[i].mdp, argp->mdp);
+			printf("%s\n", tabCompte[i].mdp);
 			result = 1;
 		}
 	}
 
+	printf("+++ End Maj Info +++\n");
 	return &result;
 }
 
