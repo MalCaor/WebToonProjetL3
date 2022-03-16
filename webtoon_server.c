@@ -115,6 +115,13 @@ afficher_serie_1_svc(argTri *argp, struct svc_req *rqstp)
 	
 	printf("send %i serie\n", result.nbSerie);
 
+	printf("--- test Result ---\n");
+	for (size_t i = 0; i < result.nbSerie; i++)
+	{
+		printf("- serie : %s\n", result.listSerie[i].titre);
+	}
+	
+
 	printf("+++ End Aff Serie +++\n");
 
 	return &result;
