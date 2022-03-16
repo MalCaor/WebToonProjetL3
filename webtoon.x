@@ -2,11 +2,11 @@ struct commentaire{char pseudo[15]; char comm[15];};
 struct date{int jour; int mois; int annee;};
 struct genre{int idGenre; char nomGenre[15];};
 
-struct serie{int idSerie; char titre[15]; double noteMoyenne; int listGenre[15]; date dateSerie; commentaire listComm[15]; int nbrVue; int nbEpisode; char description[15];};
+struct serie{int idSerie; char titre[10]; double noteMoyenne; int listGenre[10]; date dateSerie; commentaire listComm[5]; int nbrVue; int nbEpisode; char description[10];};
 struct argAjoutComm{serie s; commentaire c;};
 struct argAjouterNote{serie serieNote; int note;};
 struct argTri{int tri; genre genreChoisi;};
-struct listSerie{int nbSerie; serie listSerie[15];};
+struct listSerie{int nbSerie; serie listSerie[5];};
 struct compte{char pseudo[15]; char mdp[15]; int carteBancaire; int serieFavorite[15]; int coin;};
 struct argAchaCoin{compte compteAcheteur; int nbCoin;};
 struct argAchaSerie{serie serieAchete; compte compteAcheteur;};
