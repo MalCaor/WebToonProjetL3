@@ -129,13 +129,21 @@ webtoon_prog_1(char *host)
 		}
 	}
 
-	
+	maj_info_1_arg.carteBancaire = 1234123412341234;
 	result_maj_info = maj_info_1(&maj_info_1_arg, clnt);
 	if (result_maj_info == (int *) NULL) {
 		clnt_perror (clnt, "Maj Info call failed");
+	}else{
+		if (*result_inscription == 0){
+			// echec
+			printf("maj_info_1 echec\n");
+		}else{
+			//echec
+			printf("maj_info_1 reussi\n");
+		}
 	}
-	
-	/*
+
+	// acheter_coin_1_arg est deja remplie au premier appel
 	result_acheter_coin = acheter_coin_1(&acheter_coin_1_arg, clnt);
 	if (result_acheter_coin == (int *) NULL) {
 		clnt_perror (clnt, "Acheter Coin call failed");
@@ -148,6 +156,8 @@ webtoon_prog_1(char *host)
 			printf("acheter_coin_1 reussi\n");
 		}
 	}
+
+	/*
 	result_afficher_coin = afficher_coin_1(&afficher_coin_1_arg, clnt);
 	if (result_afficher_coin == (int *) NULL) {
 		clnt_perror (clnt, "Afficher Coincall failed");

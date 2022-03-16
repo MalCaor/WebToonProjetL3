@@ -25,7 +25,7 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	s1.listGenre[0]=1;s1.listGenre[1]=3;
 	s1.dateSerie.jour=10; s1.dateSerie.mois=1; s1.dateSerie.annee=2020;
 	strcpy(s1.listComm[0].comm,"Sympa"); strcpy(s1.listComm[0].pseudo,"Le Narrateur"); 
-	strcpy(s1.listComm[1].comm,"Bof deja vu"); strcpy(s1.listComm[1].pseudo,"Malcaor"); 
+	strcpy(s1.listComm[1].comm,"deja vu"); strcpy(s1.listComm[1].pseudo,"Malcaor"); 
 	s1.nbrVue=10;
 	s1.nbEpisode=3;
 	strcpy(s1.description, "Une ");
