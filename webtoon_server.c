@@ -35,7 +35,7 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	strcpy(s2.listComm[1].comm,"Je pleurais"); strcpy(s2.listComm[1].pseudo,"Malcaor"); 
 	s2.nbrVue=10;
 	s2.nbEpisode=3;
-	strcpy(s2.description, "Cela fait 3 mois, ma famille s'inquiete, je mange du pain rassis, la police ne viens toujours pas. A l'aide.\n");
+	strcpy(s2.description, "A l'aide.\n");
 
 	return (void *) &result;
 }
