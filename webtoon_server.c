@@ -9,6 +9,7 @@
 static struct compte tabCompte[10];
 static int nbCompte = 0;
 static struct serie tabSerie[10];
+static int nbSerie = 0;
 
 void *
 init_1_svc(void *argp, struct svc_req *rqstp)
@@ -39,6 +40,11 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	s2.nbrVue=10;
 	s2.nbEpisode=3;
 	strcpy(s2.description, "A l'aide.\n");
+
+	tabSerie[nbSerie] = s1;
+	nbSerie++;
+	tabSerie[nbSerie] = s2;
+	nbSerie++;
 
 	printf("+++ End Server Init +++\n");
 
@@ -98,7 +104,18 @@ afficher_serie_1_svc(argTri *argp, struct svc_req *rqstp)
 {
 	static listSerie  result;
 
+	printf("+++ Start Aff Serie +++\n");
 	
+	for (size_t i = 0; i < nbSerie; i++)
+	{
+		result.listSerie[i] = tabSerie[i];
+	}
+
+	result.nbSerie = nbSerie;
+	
+	printf("send %i serie\n", result.nbSerie);
+
+	printf("+++ End Aff Serie +++\n");
 
 	return &result;
 }
