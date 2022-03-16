@@ -94,7 +94,6 @@ webtoon_prog_1(char *host)
 		clnt_perror (clnt, "Afficher Serie call failed");
 	}else{
 		if(result_afficher_serie != NULL){
-			int i=0;
 			printf("Les Series : %s\n", afficher_serie_1_arg.genreChoisi);
 			for(int i=0; i<result_afficher_serie->nbSerie; i++){
 				printf("%s\n",result_afficher_serie->listSerie[i]);
@@ -102,7 +101,8 @@ webtoon_prog_1(char *host)
 		}
 	}
 	
-	/*
+	strcpy(acheter_serie_1_arg.serieAchete.titre,"L'enfermation");
+	strcpy(acheter_serie_1_arg.compteAcheteur.pseudo,"Le Narrateur");
 	result_acheter_serie = acheter_serie_1(&acheter_serie_1_arg, clnt);
 	if (result_acheter_serie == (int *) NULL) {
 		clnt_perror (clnt, "Acheter Serie call failed");
@@ -115,6 +115,9 @@ webtoon_prog_1(char *host)
 			printf("acheter_serie_1 reussi\n");
 		}
 	}
+
+	strcpy(acheter_coin_1_arg.compteAcheteur.pseudo,"Le Narrateur");
+	acheter_coin_1_arg.nbCoin = 100;
 	result_acheter_coin = acheter_coin_1(&acheter_coin_1_arg, clnt);
 	if (result_acheter_coin == (int *) NULL) {
 		clnt_perror (clnt, "Acheter Coin call failed");
@@ -127,10 +130,14 @@ webtoon_prog_1(char *host)
 			printf("acheter_coin_1 reussi\n");
 		}
 	}
+
+	
 	result_maj_info = maj_info_1(&maj_info_1_arg, clnt);
 	if (result_maj_info == (int *) NULL) {
 		clnt_perror (clnt, "Maj Info call failed");
 	}
+
+	/*
 	result_acheter_coin = acheter_coin_1(&acheter_coin_1_arg, clnt);
 	if (result_acheter_coin == (int *) NULL) {
 		clnt_perror (clnt, "Acheter Coin call failed");
