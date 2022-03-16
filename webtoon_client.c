@@ -69,7 +69,11 @@ webtoon_prog_1(char *host)
 			printf("Inscription reussie\n");
 		}
 	}
-	/*
+
+	// update mdp with abcd
+	maj_info_1_arg = inscription_1_arg;
+	strcpy(inscription_1_arg.mdp,"abcd");
+
 	result_maj_info = maj_info_1(&maj_info_1_arg, clnt);
 	if (result_maj_info == (int *) NULL) {
 		clnt_perror (clnt, "Maj Info call failed");
@@ -82,6 +86,7 @@ webtoon_prog_1(char *host)
 			printf("maj_info_1 reussi\n");
 		}
 	}
+	/*
 	result_afficher_serie = afficher_serie_1(&afficher_serie_1_arg, clnt);
 	if (result_afficher_serie == (listSerie *) NULL) {
 		clnt_perror (clnt, "Afficher Serie call failed");
