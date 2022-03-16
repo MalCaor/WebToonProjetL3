@@ -87,15 +87,17 @@ webtoon_prog_1(char *host)
 		}
 	}
 	
+	strcpy(&afficher_serie_1_arg.genreChoisi, "humour");
+	afficher_serie_1_arg.tri = 1;
 	result_afficher_serie = afficher_serie_1(&afficher_serie_1_arg, clnt);
 	if (result_afficher_serie == (listSerie *) NULL) {
 		clnt_perror (clnt, "Afficher Serie call failed");
 	}else{
 		if(result_afficher_serie != NULL){
 			int i=0;
-			
-			while(result_acheter_serie[i]!=NULL){
-
+			printf("Les Series : %s\n", afficher_serie_1_arg.genreChoisi);
+			for(int i=0; i<result_afficher_serie->nbSerie; i++){
+				printf("%s\n",result_afficher_serie->listSerie[i]);
 			}
 		}
 	}
