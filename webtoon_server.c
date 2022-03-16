@@ -6,9 +6,9 @@
 
 #include "webtoon.h"
 
-static struct compte tabCompte[10];
+compte tabCompte[10];
 static int nbCompte = 0;
-static struct serie tabSerie[10];
+serie tabSerie[10];
 static int nbSerie = 0;
 
 void *
@@ -28,7 +28,7 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	strcpy(s1.listComm[1].comm,"Bof deja vu"); strcpy(s1.listComm[1].pseudo,"Malcaor"); 
 	s1.nbrVue=10;
 	s1.nbEpisode=3;
-	strcpy(s1.description, "Une aventure");
+	strcpy(s1.description, "Une ");
 
 	struct serie s2;
 	strcpy(s2.titre, "L'enfermation");
@@ -103,6 +103,7 @@ listSerie *
 afficher_serie_1_svc(argTri *argp, struct svc_req *rqstp)
 {
 	static listSerie  result;
+	printf("test %s\n", argp->genreChoisi.nomGenre);
 
 	printf("+++ Start Aff Serie +++\n");
 	

@@ -35,14 +35,14 @@ typedef struct genre genre;
 
 struct serie {
 	int idSerie;
-	char titre[15];
+	char titre[10];
 	double noteMoyenne;
-	int listGenre[15];
+	int listGenre[10];
 	date dateSerie;
-	commentaire listComm[15];
+	commentaire listComm[5];
 	int nbrVue;
 	int nbEpisode;
-	char description[15];
+	char description[10];
 };
 typedef struct serie serie;
 
@@ -66,7 +66,7 @@ typedef struct argTri argTri;
 
 struct listSerie {
 	int nbSerie;
-	serie listSerie[15];
+	serie listSerie[5];
 };
 typedef struct listSerie listSerie;
 
