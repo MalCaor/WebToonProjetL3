@@ -72,7 +72,7 @@ webtoon_prog_1(char *host)
 
 	// update mdp with abcd
 	maj_info_1_arg = inscription_1_arg;
-	strcpy(inscription_1_arg.mdp,"abcd");
+	strcpy(maj_info_1_arg.mdp,"abcd");
 
 	result_maj_info = maj_info_1(&maj_info_1_arg, clnt);
 	if (result_maj_info == (int *) NULL) {

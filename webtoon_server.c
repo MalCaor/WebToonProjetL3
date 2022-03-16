@@ -15,6 +15,9 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 {
 	static char * result;
 
+	// start init
+	printf("+++ Start Server Init +++\n");
+
 	struct serie s1;
 	strcpy(s1.titre, "Le Hero");
 	s1.noteMoyenne;
@@ -37,24 +40,33 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	s2.nbEpisode=3;
 	strcpy(s2.description, "A l'aide.\n");
 
+	printf("+++ End Server Init +++\n");
+
 	return (void *) &result;
 }
 
 int *
 inscription_1_svc(compte *argp, struct svc_req *rqstp)
 {
+	printf("+++ Start Add User +++\n");
 	static int  result;
 	struct serie s[15];
 	struct compte *c = (struct compte *) malloc(sizeof(struct compte));
 	strcpy(c->pseudo, argp->pseudo);
+	printf("- pseudo : %s\n", c->pseudo);
 	strcpy(c->mdp,argp->mdp);
+	printf("- mdp : %s\n", c->mdp);
 	if(argp->carteBancaire>0){
-		c->carteBancaire = argp->carteBancaire;		
+		c->carteBancaire = argp->carteBancaire;
+		printf("- carte bancaire : %i\n", c->carteBancaire);
 	}
 	c->coin = argp->coin;
+	printf("- coin : %i\n", c->coin);
 	
 	tabCompte[nbCompte] = *c;
 	if(&tabCompte[nbCompte] != NULL){result=1;nbCompte++;}else{result=0;}
+
+	printf("+++ End Add User +++\n");
 	
 	return &result;
 }
@@ -62,16 +74,22 @@ inscription_1_svc(compte *argp, struct svc_req *rqstp)
 int *
 maj_info_1_svc(compte *argp, struct svc_req *rqstp)
 {
+	printf("+++ Start Maj Info +++\n");
 	static int  result = 0;
 
 	for(int i=0;i<nbCompte;i++){
 		if(strcmp(argp->pseudo,tabCompte[i].pseudo)==0){
+			printf("- carte bancaire : %i => ", tabCompte[i].carteBancaire);
 			tabCompte[i].carteBancaire = argp->carteBancaire;
+			printf("%i\n", tabCompte[i].carteBancaire);
+			printf("- mdp : %s => ", tabCompte[i].mdp);
 			strcpy(tabCompte[i].mdp, argp->mdp);
+			printf("%s\n", tabCompte[i].mdp);
 			result = 1;
 		}
 	}
 
+	printf("+++ End Maj Info +++\n");
 	return &result;
 }
 
