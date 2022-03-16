@@ -100,7 +100,6 @@ webtoon_prog_1(char *host)
 			}
 		}
 	}
-	
 	strcpy(acheter_serie_1_arg.serieAchete.titre,"L'enfermation");
 	strcpy(acheter_serie_1_arg.compteAcheteur.pseudo,"Le Narrateur");
 	result_acheter_serie = acheter_serie_1(&acheter_serie_1_arg, clnt);
@@ -115,7 +114,6 @@ webtoon_prog_1(char *host)
 			printf("acheter_serie_1 reussi\n");
 		}
 	}
-
 	strcpy(acheter_coin_1_arg.compteAcheteur.pseudo,"Le Narrateur");
 	acheter_coin_1_arg.nbCoin = 100;
 	result_acheter_coin = acheter_coin_1(&acheter_coin_1_arg, clnt);
@@ -136,7 +134,7 @@ webtoon_prog_1(char *host)
 	if (result_maj_info == (int *) NULL) {
 		clnt_perror (clnt, "Maj Info call failed");
 	}
-
+	
 	/*
 	result_acheter_coin = acheter_coin_1(&acheter_coin_1_arg, clnt);
 	if (result_acheter_coin == (int *) NULL) {
