@@ -58,14 +58,14 @@ xdr_serie (XDR *xdrs, serie *objp)
 	if (xdrs->x_op == XDR_ENCODE) {
 		 if (!xdr_int (xdrs, &objp->idSerie))
 			 return FALSE;
-		 if (!xdr_vector (xdrs, (char *)objp->titre, 15,
+		 if (!xdr_vector (xdrs, (char *)objp->titre, 10,
 			sizeof (char), (xdrproc_t) xdr_char))
 			 return FALSE;
 		 if (!xdr_double (xdrs, &objp->noteMoyenne))
 			 return FALSE;
-		buf = XDR_INLINE (xdrs, ( 15 ) * BYTES_PER_XDR_UNIT);
+		buf = XDR_INLINE (xdrs, ( 10 ) * BYTES_PER_XDR_UNIT);
 		if (buf == NULL) {
-			 if (!xdr_vector (xdrs, (char *)objp->listGenre, 15,
+			 if (!xdr_vector (xdrs, (char *)objp->listGenre, 10,
 				sizeof (int), (xdrproc_t) xdr_int))
 				 return FALSE;
 
@@ -74,35 +74,35 @@ xdr_serie (XDR *xdrs, serie *objp)
 			register int *genp;
 
 			for (i = 0, genp = objp->listGenre;
-				i < 15; ++i) {
+				i < 10; ++i) {
 				IXDR_PUT_LONG(buf, *genp++);
 			}
 		}
 		}
 		 if (!xdr_date (xdrs, &objp->dateSerie))
 			 return FALSE;
-		 if (!xdr_vector (xdrs, (char *)objp->listComm, 15,
+		 if (!xdr_vector (xdrs, (char *)objp->listComm, 5,
 			sizeof (commentaire), (xdrproc_t) xdr_commentaire))
 			 return FALSE;
 		 if (!xdr_int (xdrs, &objp->nbrVue))
 			 return FALSE;
 		 if (!xdr_int (xdrs, &objp->nbEpisode))
 			 return FALSE;
-		 if (!xdr_vector (xdrs, (char *)objp->description, 15,
+		 if (!xdr_vector (xdrs, (char *)objp->description, 10,
 			sizeof (char), (xdrproc_t) xdr_char))
 			 return FALSE;
 		return TRUE;
 	} else if (xdrs->x_op == XDR_DECODE) {
 		 if (!xdr_int (xdrs, &objp->idSerie))
 			 return FALSE;
-		 if (!xdr_vector (xdrs, (char *)objp->titre, 15,
+		 if (!xdr_vector (xdrs, (char *)objp->titre, 10,
 			sizeof (char), (xdrproc_t) xdr_char))
 			 return FALSE;
 		 if (!xdr_double (xdrs, &objp->noteMoyenne))
 			 return FALSE;
-		buf = XDR_INLINE (xdrs, ( 15 ) * BYTES_PER_XDR_UNIT);
+		buf = XDR_INLINE (xdrs, ( 10 ) * BYTES_PER_XDR_UNIT);
 		if (buf == NULL) {
-			 if (!xdr_vector (xdrs, (char *)objp->listGenre, 15,
+			 if (!xdr_vector (xdrs, (char *)objp->listGenre, 10,
 				sizeof (int), (xdrproc_t) xdr_int))
 				 return FALSE;
 
@@ -111,21 +111,21 @@ xdr_serie (XDR *xdrs, serie *objp)
 			register int *genp;
 
 			for (i = 0, genp = objp->listGenre;
-				i < 15; ++i) {
+				i < 10; ++i) {
 				*genp++ = IXDR_GET_LONG(buf);
 			}
 		}
 		}
 		 if (!xdr_date (xdrs, &objp->dateSerie))
 			 return FALSE;
-		 if (!xdr_vector (xdrs, (char *)objp->listComm, 15,
+		 if (!xdr_vector (xdrs, (char *)objp->listComm, 5,
 			sizeof (commentaire), (xdrproc_t) xdr_commentaire))
 			 return FALSE;
 		 if (!xdr_int (xdrs, &objp->nbrVue))
 			 return FALSE;
 		 if (!xdr_int (xdrs, &objp->nbEpisode))
 			 return FALSE;
-		 if (!xdr_vector (xdrs, (char *)objp->description, 15,
+		 if (!xdr_vector (xdrs, (char *)objp->description, 10,
 			sizeof (char), (xdrproc_t) xdr_char))
 			 return FALSE;
 	 return TRUE;
@@ -133,24 +133,24 @@ xdr_serie (XDR *xdrs, serie *objp)
 
 	 if (!xdr_int (xdrs, &objp->idSerie))
 		 return FALSE;
-	 if (!xdr_vector (xdrs, (char *)objp->titre, 15,
+	 if (!xdr_vector (xdrs, (char *)objp->titre, 10,
 		sizeof (char), (xdrproc_t) xdr_char))
 		 return FALSE;
 	 if (!xdr_double (xdrs, &objp->noteMoyenne))
 		 return FALSE;
-	 if (!xdr_vector (xdrs, (char *)objp->listGenre, 15,
+	 if (!xdr_vector (xdrs, (char *)objp->listGenre, 10,
 		sizeof (int), (xdrproc_t) xdr_int))
 		 return FALSE;
 	 if (!xdr_date (xdrs, &objp->dateSerie))
 		 return FALSE;
-	 if (!xdr_vector (xdrs, (char *)objp->listComm, 15,
+	 if (!xdr_vector (xdrs, (char *)objp->listComm, 5,
 		sizeof (commentaire), (xdrproc_t) xdr_commentaire))
 		 return FALSE;
 	 if (!xdr_int (xdrs, &objp->nbrVue))
 		 return FALSE;
 	 if (!xdr_int (xdrs, &objp->nbEpisode))
 		 return FALSE;
-	 if (!xdr_vector (xdrs, (char *)objp->description, 15,
+	 if (!xdr_vector (xdrs, (char *)objp->description, 10,
 		sizeof (char), (xdrproc_t) xdr_char))
 		 return FALSE;
 	return TRUE;
@@ -200,7 +200,7 @@ xdr_listSerie (XDR *xdrs, listSerie *objp)
 	int i;
 	 if (!xdr_int (xdrs, &objp->nbSerie))
 		 return FALSE;
-	 if (!xdr_vector (xdrs, (char *)objp->listSerie, 15,
+	 if (!xdr_vector (xdrs, (char *)objp->listSerie, 5,
 		sizeof (serie), (xdrproc_t) xdr_serie))
 		 return FALSE;
 	return TRUE;

@@ -94,9 +94,9 @@ webtoon_prog_1(char *host)
 		clnt_perror (clnt, "Afficher Serie call failed");
 	}else{
 		if(result_afficher_serie != NULL){
-			printf("Les Series : %s\n", afficher_serie_1_arg.genreChoisi);
+			printf("Les Series : %s\n", afficher_serie_1_arg.genreChoisi.nomGenre);
 			for(int i=0; i<result_afficher_serie->nbSerie; i++){
-				printf("%s\n",result_afficher_serie->listSerie[i]);
+				printf("%s\n",result_afficher_serie->listSerie[i].titre);
 			}
 		}
 	}
