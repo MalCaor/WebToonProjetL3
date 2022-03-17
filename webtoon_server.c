@@ -209,6 +209,13 @@ acheter_coin_1_svc(argAchaCoin *argp, struct svc_req *rqstp)
 		if(strcmp(tabCompte[i].pseudo, argp->compteAcheteur.pseudo) == 0){
 			// compte trouvé
 
+			if(argp->compteAcheteur.carteBancaire <=0){
+				printf("- pas de carte bancaire -\n");
+				// pas de carte bancaire
+				result = 0;
+				return &result;
+			}
+
 			tabCompte[i].coin += argp->nbCoin;
 			printf("- Transaction Effectué -\n");
 			printf("- %i coins ajouté au compte du client -\n", argp->nbCoin);
