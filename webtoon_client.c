@@ -47,17 +47,21 @@ webtoon_prog_1(char *host)
 #endif	/* DEBUG */
 
 	result_init = init_1((void*)&init_1_arg, clnt);
+	printf("+++ Start Server Init +++\n");
 	if (result_init == (void *) NULL) {
 		clnt_perror (clnt, "Init call failed");
 	} else {
 		printf("Initialisation termine\n");
 	}
+	printf("+++ End Server Init +++\n\n");
 	
+
 	strcpy(inscription_1_arg.pseudo,"Le Narrateur");
 	strcpy(inscription_1_arg.mdp,"1234");
 	inscription_1_arg.carteBancaire=0;
 	inscription_1_arg.coin=0;
 	result_inscription = inscription_1(&inscription_1_arg, clnt);
+	printf("+++ Start Add User +++\n");
 	if (result_inscription == (int *) NULL) {
 		clnt_perror (clnt, "Inscription call failed");
 	} else {
@@ -69,11 +73,12 @@ webtoon_prog_1(char *host)
 			printf("Inscription reussie\n");
 		}
 	}
+	printf("+++ End Add User +++\n\n");
 
 	// update mdp with abcd
 	maj_info_1_arg = inscription_1_arg;
 	strcpy(maj_info_1_arg.mdp,"abcd");
-
+	printf("+++ Start Maj Info +++\n");
 	result_maj_info = maj_info_1(&maj_info_1_arg, clnt);
 	if (result_maj_info == (int *) NULL) {
 		clnt_perror (clnt, "Maj Info call failed");
@@ -86,7 +91,9 @@ webtoon_prog_1(char *host)
 			printf("maj_info_1 reussi\n");
 		}
 	}
+	printf("+++ End Maj Info +++\n\n");
 	
+	printf("+++ Start Afficher Series +++\n");
 	strcpy(afficher_serie_1_arg.genreChoisi.nomGenre, "rire");
 	*afficher_serie_1_arg.genreChoisi.nomGenre = 1;
 	result_afficher_serie = afficher_serie_1(&afficher_serie_1_arg, clnt);
@@ -100,7 +107,10 @@ webtoon_prog_1(char *host)
 			}
 		}
 	}
+	printf("+++ End Afficher Series +++\n\n");
 	
+
+	printf("+++ Start Acheter Series +++\n");
 	acheter_serie_1_arg.serieAchete.idSerie=1;
 	strcpy(acheter_serie_1_arg.compteAcheteur.pseudo,"Le Narrateur");
 	result_acheter_serie = acheter_serie_1(&acheter_serie_1_arg, clnt);
@@ -115,6 +125,10 @@ webtoon_prog_1(char *host)
 			printf("acheter_serie_1 reussi\n");
 		}
 	}
+	printf("+++ End Acheter Series +++\n\n");
+
+
+	printf("+++ Start Acheter Coin +++\n");
 	strcpy(acheter_coin_1_arg.compteAcheteur.pseudo,"Le Narrateur");
 	acheter_coin_1_arg.nbCoin = 100;
 	result_acheter_coin = acheter_coin_1(&acheter_coin_1_arg, clnt);
@@ -129,6 +143,7 @@ webtoon_prog_1(char *host)
 			printf("acheter_coin_1 reussi\n");
 		}
 	}
+	printf("+++ End Acheter Coin +++\n\n");
 
 	maj_info_1_arg.carteBancaire = 123412341;
 	result_maj_info = maj_info_1(&maj_info_1_arg, clnt);
