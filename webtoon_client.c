@@ -221,7 +221,11 @@ webtoon_prog_1(char *host)
 	}
 	printf("+++ End Ajouter Favoris +++\n\n");
 	
-	/*
+	
+	printf("+++ Start Ajouter Commentaire +++\n");
+	strcpy(ajouter_commentaire_1_arg.c.comm, "sympa");
+	strcpy(ajouter_commentaire_1_arg.c.pseudo, "Le Narrateur");
+	strcpy(ajouter_commentaire_1_arg.s.titre,"Locked");
 	result_ajouter_commentaire = ajouter_commentaire_1(&ajouter_commentaire_1_arg, clnt);
 	if (result_ajouter_commentaire == (int *) NULL) {
 		clnt_perror (clnt, "Ajouter Commentaire call failed");
@@ -234,6 +238,12 @@ webtoon_prog_1(char *host)
 			printf("ajouter_commentaire_1 reussi\n");
 		}
 	}
+	printf("+++ End Ajouter Commentaire +++\n\n");
+
+	
+	printf("+++ Start Ajouter Note +++\n");
+	ajouter_note_1_arg.note = 10;
+	strcpy(ajouter_note_1_arg.serieNote.titre,"Locked");
 	result_ajouter_note = ajouter_note_1(&ajouter_note_1_arg, clnt);
 	if (result_ajouter_note == (int *) NULL) {
 		clnt_perror (clnt, "Ajouter Note call failed");
@@ -246,6 +256,12 @@ webtoon_prog_1(char *host)
 			printf("ajouter_note_1 reussi\n");
 		}
 	}
+	printf("+++ End Ajouter Note +++\n\n");
+
+	
+	printf("+++ Start Supprimer Favoris +++\n");
+	strcpy(supprimer_favoris_1_arg.serieAchete.titre,"Locked");
+	strcpy(supprimer_favoris_1_arg.compteAcheteur.pseudo,"Le Narrateur");
 	result_supprimer_favoris = supprimer_favoris_1(&supprimer_favoris_1_arg, clnt);
 	if (result_supprimer_favoris == (int *) NULL) {
 		clnt_perror (clnt, "Supprimer Favoris call failed");
@@ -258,6 +274,13 @@ webtoon_prog_1(char *host)
 			printf("supprimer_favoris_1 reussi\n");
 		}
 	}
+	printf("+++ End Supprimer Favoris +++\n\n");
+
+
+	printf("+++ Start Supprimer Commentaire +++\n");
+	strcpy(supprimer_commentaire_1_arg.c.comm,"sympa");
+	strcpy(supprimer_commentaire_1_arg.c.pseudo,"Le Narrateur");
+	strcpy(supprimer_commentaire_1_arg.s.titre,"Locked");
 	result_supprimer_commentaire = supprimer_commentaire_1(&supprimer_commentaire_1_arg, clnt);
 	if (result_supprimer_commentaire == (int *) NULL) {
 		clnt_perror (clnt, "Supprimer Commentaire call failed");
@@ -269,7 +292,8 @@ webtoon_prog_1(char *host)
 			//echec
 			printf("supprimer_commentaire_1 reussi\n");
 		}
-	}*/
+	}
+	printf("+++ End Supprimer Commentaire +++\n");
 
 #ifndef	DEBUG
 	clnt_destroy (clnt);
