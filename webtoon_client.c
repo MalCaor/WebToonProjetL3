@@ -129,7 +129,7 @@ webtoon_prog_1(char *host)
 		}
 	}
 
-	maj_info_1_arg.carteBancaire = 1234123412341234;
+	maj_info_1_arg.carteBancaire = 123412341;
 	result_maj_info = maj_info_1(&maj_info_1_arg, clnt);
 	if (result_maj_info == (int *) NULL) {
 		clnt_perror (clnt, "Maj Info call failed");
