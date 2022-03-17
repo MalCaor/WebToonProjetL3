@@ -207,6 +207,9 @@ acheter_coin_1_svc(argAchaCoin *argp, struct svc_req *rqstp)
 	for (size_t i = 0; i < nbCompte; i++)
 	{
 		if(strcmp(tabCompte[i].pseudo, argp->compteAcheteur.pseudo) == 0){
+			// compte trouvé
+
+			tabCompte[i].coin += argp->nbCoin;
 			printf("- Transaction Effectué -\n");
 			printf("- %i coins ajouté au compte du client -\n", argp->nbCoin);
 
@@ -231,11 +234,14 @@ afficher_coin_1_svc(compte *argp, struct svc_req *rqstp)
 {
 	static int  result;
 
+	printf("+++ Start Aff Coin +++\n");
+
 	printf("pseudo a trouver : %s\n", argp->pseudo);
 
 	for (size_t i = 0; i < nbCompte; i++)
 	{
 		if(strcmp(tabCompte[i].pseudo, argp->pseudo) == 0){
+			printf("Pseudo trouvé avec %i coins\n", tabCompte[i].coin);
 
 			result = tabCompte[i].coin;
 
@@ -244,6 +250,8 @@ afficher_coin_1_svc(compte *argp, struct svc_req *rqstp)
 	}
 
 	result = -1;
+
+	printf("+++ End Aff Coin +++\n\n");
 
 	return &result;
 }
