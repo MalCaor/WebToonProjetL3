@@ -185,9 +185,9 @@ webtoon_prog_1(char *host)
 	if (result_afficher_coin == (int *) NULL) {
 		clnt_perror (clnt, "Afficher Coincall failed");
 	}else{
-		printf("Vous avez : %d coin(s) \n",result_afficher_coin);
+		printf("Vous avez : %d coin(s) \n",*result_afficher_coin);
 	}
-	printf("+++ End Afficher Coin +++\n");
+	printf("+++ End Afficher Coin +++\n\n");
 
 	
 	printf("+++ Start Ajouter Favoris +++\n");
