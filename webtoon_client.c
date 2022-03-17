@@ -78,7 +78,7 @@ webtoon_prog_1(char *host)
 	if (result_maj_info == (int *) NULL) {
 		clnt_perror (clnt, "Maj Info call failed");
 	} else {
-		if (*result_inscription == 0){
+		if (*result_maj_info == 0){
 			// echec
 			printf("maj_info_1 echec\n");
 		}else{
@@ -100,13 +100,14 @@ webtoon_prog_1(char *host)
 			}
 		}
 	}
-	strcpy(acheter_serie_1_arg.serieAchete.titre,"L'enfermation");
+	
+	acheter_serie_1_arg.serieAchete.idSerie=1;
 	strcpy(acheter_serie_1_arg.compteAcheteur.pseudo,"Le Narrateur");
 	result_acheter_serie = acheter_serie_1(&acheter_serie_1_arg, clnt);
 	if (result_acheter_serie == (int *) NULL) {
 		clnt_perror (clnt, "Acheter Serie call failed");
 	} else {
-		if (*result_inscription == 0){
+		if (*result_acheter_serie == 0){
 			// echec
 			printf("acheter_serie_1 echec\n");
 		}else{
@@ -120,7 +121,7 @@ webtoon_prog_1(char *host)
 	if (result_acheter_coin == (int *) NULL) {
 		clnt_perror (clnt, "Acheter Coin call failed");
 	} else {
-		if (*result_inscription == 0){
+		if (*result_acheter_coin == 0){
 			// echec
 			printf("acheter_coin_1 echec\n");
 		}else{
@@ -134,7 +135,7 @@ webtoon_prog_1(char *host)
 	if (result_maj_info == (int *) NULL) {
 		clnt_perror (clnt, "Maj Info call failed");
 	}else{
-		if (*result_inscription == 0){
+		if (*result_maj_info == 0){
 			// echec
 			printf("maj_info_1 echec\n");
 		}else{
@@ -148,25 +149,30 @@ webtoon_prog_1(char *host)
 	if (result_acheter_coin == (int *) NULL) {
 		clnt_perror (clnt, "Acheter Coin call failed");
 	} else {
-		if (*result_inscription == 0){
+		if (*result_acheter_coin == 0){
 			// echec
 			printf("acheter_coin_1 echec\n");
 		}else{
-			//echec
+			//ok
 			printf("acheter_coin_1 reussi\n");
+			printf("Vous avez acheté %d coins\n",acheter_coin_1_arg.nbCoin);
 		}
 	}
 
-	/*
+	afficher_coin_1_arg;
 	result_afficher_coin = afficher_coin_1(&afficher_coin_1_arg, clnt);
 	if (result_afficher_coin == (int *) NULL) {
 		clnt_perror (clnt, "Afficher Coincall failed");
+	}else{
+		printf("Vous avez : %d coin(s) \n",result_afficher_coin);
 	}
+
+	
 	result_ajouter_favoris = ajouter_favoris_1(&ajouter_favoris_1_arg, clnt);
 	if (result_ajouter_favoris == (int *) NULL) {
 		clnt_perror (clnt, "Ajouter Favoris call failed");
 	} else {
-		if (*result_inscription == 0){
+		if (*result_ajouter_favoris == 0){
 			// echec
 			printf("ajouter_favoris_1 echec\n");
 		}else{
@@ -174,10 +180,21 @@ webtoon_prog_1(char *host)
 			printf("ajouter_favoris_1 reussi\n");
 		}
 	}
+
+	strcpy(afficher_favoris_1_arg.pseudo,"Le Narrateur");
 	result_afficher_favoris = afficher_favoris_1(&afficher_favoris_1_arg, clnt);
 	if (result_afficher_favoris == (listSerie *) NULL) {
 		clnt_perror (clnt, "Afficher Favoris call failed");
+	}else{
+		if(result_afficher_serie != NULL){
+			printf("Les Series favorites de %s\n", afficher_favoris_1_arg.pseudo);
+			for(int i=0; i<result_afficher_serie->nbSerie; i++){
+				printf("%s\n",result_afficher_serie->listSerie[i].titre);
+			}
+		}
 	}
+	
+	/*
 	result_ajouter_commentaire = ajouter_commentaire_1(&ajouter_commentaire_1_arg, clnt);
 	if (result_ajouter_commentaire == (int *) NULL) {
 		clnt_perror (clnt, "Ajouter Commentaire call failed");
