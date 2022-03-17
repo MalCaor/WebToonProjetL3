@@ -180,7 +180,7 @@ webtoon_prog_1(char *host)
 	printf("+++ End Acheter Coin +++\n\n");
 
 	printf("+++ Start Afficher Coin +++\n");
-	strcpy(afficher_coin_1_arg,"Le Narrateur");
+	strcpy(afficher_coin_1_arg.pseudo,"Le Narrateur");
 	result_afficher_coin = afficher_coin_1(&afficher_coin_1_arg, clnt);
 	if (result_afficher_coin == (int *) NULL) {
 		clnt_perror (clnt, "Afficher Coincall failed");
@@ -191,7 +191,7 @@ webtoon_prog_1(char *host)
 
 	
 	printf("+++ Start Ajouter Favoris +++\n");
-	ajouter_favoris_1_arg;
+	strcpy(ajouter_favoris_1_arg.compteAcheteur.pseudo,"Le Narrateur");
 	result_ajouter_favoris = ajouter_favoris_1(&ajouter_favoris_1_arg, clnt);
 	if (result_ajouter_favoris == (int *) NULL) {
 		clnt_perror (clnt, "Ajouter Favoris call failed");
