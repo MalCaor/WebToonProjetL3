@@ -26,6 +26,7 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	s1.noteMoyenne;
 	s1.listGenre[0]=0;s1.listGenre[1]=2;
 	s1.dateSerie.jour=10; s1.dateSerie.mois=1; s1.dateSerie.annee=2020;
+	s1.idSerie = 0;
 	strcpy(s1.listComm[0].comm,"Sympa"); strcpy(s1.listComm[0].pseudo,"Le Narrateur"); 
 	strcpy(s1.listComm[1].comm,"deja vu"); strcpy(s1.listComm[1].pseudo,"Malcaor"); 
 	s1.nbrVue=10;
@@ -37,6 +38,7 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	s2.noteMoyenne;
 	s2.listGenre[0]=0;s2.listGenre[1]=1;
 	s2.dateSerie.jour=10; s2.dateSerie.mois=1; s2.dateSerie.annee=2020;
+	s2.idSerie = 1;
 	strcpy(s2.listComm[0].comm,"lol"); strcpy(s2.listComm[0].pseudo,"Le Narrateur"); 
 	strcpy(s2.listComm[1].comm,"Je pleurais"); strcpy(s2.listComm[1].pseudo,"Malcaor"); 
 	s2.nbrVue=10;
@@ -139,9 +141,37 @@ acheter_serie_1_svc(argAchaSerie *argp, struct svc_req *rqstp)
 {
 	static int  result;
 
-	/*
-	 * insert server code here
-	 */
+	printf("+++ Start Ach Serie +++\n");
+
+	if(argp->compteAcheteur.coin < 50){
+		printf("- Acheteur trop pauvre -\n");
+		// pas asser de coin
+		result = 0;
+		return &result;
+	}
+
+	int i = 0;
+	while (argp->compteAcheteur.serieFavorite[i] >= 0)
+	{
+		if(argp->compteAcheteur.serieFavorite[i] == argp->serieAchete.idSerie){
+			printf("- Acheteur a déjà la serie -\n");
+			// déjà acheté
+			result = 0;
+			return &result;
+		}
+		i++;
+	}
+	
+	// transaction
+	argp->compteAcheteur.coin -= 50;
+	argp->compteAcheteur.serieFavorite[i] = argp->serieAchete.idSerie;
+
+	printf("- Transaction Effectué -\n");
+	printf("- %s ajouté au compte du client -\n", argp->serieAchete.titre);
+
+	result = 1;
+
+	printf("+++ End Ach Serie +++\n");
 
 	return &result;
 }
