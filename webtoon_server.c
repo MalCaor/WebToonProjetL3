@@ -58,7 +58,7 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	strcpy(tabGenre[0].nomGenre,"film");
 	nbGenre=3;
 
-	printf("+++ End Server Init +++\n");
+	printf("+++ End Server Init +++\n\n");
 
 	return (void *) &result;
 }
@@ -84,7 +84,7 @@ inscription_1_svc(compte *argp, struct svc_req *rqstp)
 	tabCompte[nbCompte] = *c;
 	if(&tabCompte[nbCompte] != NULL){result=1;nbCompte++;}else{result=0;}
 
-	printf("+++ End Add User +++\n");
+	printf("+++ End Add User +++\n\n");
 	
 	return &result;
 }
@@ -107,7 +107,7 @@ maj_info_1_svc(compte *argp, struct svc_req *rqstp)
 		}
 	}
 
-	printf("+++ End Maj Info +++\n");
+	printf("+++ End Maj Info +++\n\n");
 	return &result;
 }
 
@@ -131,7 +131,7 @@ afficher_serie_1_svc(argTri *argp, struct svc_req *rqstp)
 	}
 	
 
-	printf("+++ End Aff Serie +++\n");
+	printf("+++ End Aff Serie +++\n\n");
 
 	return &result;
 }
@@ -171,7 +171,7 @@ acheter_serie_1_svc(argAchaSerie *argp, struct svc_req *rqstp)
 
 	result = 1;
 
-	printf("+++ End Ach Serie +++\n");
+	printf("+++ End Ach Serie +++\n\n");
 
 	return &result;
 }
@@ -193,9 +193,36 @@ acheter_coin_1_svc(argAchaCoin *argp, struct svc_req *rqstp)
 {
 	static int  result;
 
-	/*
-	 * insert server code here
-	 */
+	printf("+++ Start Ach Coin +++\n");
+
+	if(argp->nbCoin <=0){
+		printf("- nb coin negatif -\n");
+		// nb Coin negatif
+		result = 0;
+		return &result;
+	}
+
+	printf("pseudo a trouver : %s\n", argp->compteAcheteur.pseudo);
+
+	for (size_t i = 0; i < nbCompte; i++)
+	{
+		printf("pseudo : %s\n", tabCompte[i].pseudo);
+		if(strcmp(tabCompte[i].pseudo, argp->compteAcheteur.pseudo) == 0){
+			printf("- Transaction Effectué -\n");
+			printf("- %i coins ajouté au compte du client -\n", argp->nbCoin);
+
+			printf("+++ End Ach Serie +++\n\n");
+
+			result = 1;
+
+			return &result;
+		}
+	}
+	
+
+	printf("- aucun client trouvé-\n");
+
+	result = 0;
 
 	return &result;
 }
@@ -205,9 +232,7 @@ afficher_coin_1_svc(compte *argp, struct svc_req *rqstp)
 {
 	static int  result;
 
-	/*
-	 * insert server code here
-	 */
+	result = argp->coin;
 
 	return &result;
 }
