@@ -10,6 +10,8 @@ compte tabCompte[10];
 static int nbCompte = 0;
 serie tabSerie[10];
 static int nbSerie = 0;
+genre tabGenre[5];
+static int nbGenre = 0;
 
 void *
 init_1_svc(void *argp, struct svc_req *rqstp)
@@ -22,7 +24,7 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	struct serie s1;
 	strcpy(s1.titre, "Le Hero");
 	s1.noteMoyenne;
-	s1.listGenre[0]=1;s1.listGenre[1]=3;
+	s1.listGenre[0]=0;s1.listGenre[1]=2;
 	s1.dateSerie.jour=10; s1.dateSerie.mois=1; s1.dateSerie.annee=2020;
 	strcpy(s1.listComm[0].comm,"Sympa"); strcpy(s1.listComm[0].pseudo,"Le Narrateur"); 
 	strcpy(s1.listComm[1].comm,"deja vu"); strcpy(s1.listComm[1].pseudo,"Malcaor"); 
@@ -31,9 +33,9 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	strcpy(s1.description, "Une ");
 
 	struct serie s2;
-	strcpy(s2.titre, "L'enfermation");
+	strcpy(s2.titre, "Locked");
 	s2.noteMoyenne;
-	s2.listGenre[0]=1;s2.listGenre[1]=2;
+	s2.listGenre[0]=0;s2.listGenre[1]=1;
 	s2.dateSerie.jour=10; s2.dateSerie.mois=1; s2.dateSerie.annee=2020;
 	strcpy(s2.listComm[0].comm,"lol"); strcpy(s2.listComm[0].pseudo,"Le Narrateur"); 
 	strcpy(s2.listComm[1].comm,"Je pleurais"); strcpy(s2.listComm[1].pseudo,"Malcaor"); 
@@ -45,6 +47,14 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	nbSerie++;
 	tabSerie[nbSerie] = s2;
 	nbSerie++;
+
+	tabGenre[0].idGenre = 0;
+	strcpy(tabGenre[0].nomGenre,"rire");
+	tabGenre[1].idGenre = 1;
+	strcpy(tabGenre[1].nomGenre,"peur");
+	tabGenre[0].idGenre = 0;
+	strcpy(tabGenre[0].nomGenre,"film");
+	nbGenre=3;
 
 	printf("+++ End Server Init +++\n");
 

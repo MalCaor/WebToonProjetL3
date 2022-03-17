@@ -87,7 +87,7 @@ webtoon_prog_1(char *host)
 		}
 	}
 	
-	strcpy(afficher_serie_1_arg.genreChoisi.nomGenre, "humour");
+	strcpy(afficher_serie_1_arg.genreChoisi.nomGenre, "rire");
 	*afficher_serie_1_arg.genreChoisi.nomGenre = 1;
 	result_afficher_serie = afficher_serie_1(&afficher_serie_1_arg, clnt);
 	if (result_afficher_serie == (listSerie *) NULL) {
