@@ -75,6 +75,7 @@ struct compte {
 	char mdp[15];
 	int carteBancaire;
 	int serieFavorite[15];
+	int serieAchete[15];
 	int coin;
 };
 typedef struct compte compte;
