@@ -333,6 +333,7 @@ ajouter_favoris_1_svc(argAchaSerie *argp, struct svc_req *rqstp)
 						if(tabCompte[compte].serieFavorite[fav]==tabSerie[serie].idSerie){
 							printf("- serie deja en favoris -\n");
 							dejaFavoris=1;
+							result=0;
 						}
 					}
 				}
@@ -344,6 +345,7 @@ ajouter_favoris_1_svc(argAchaSerie *argp, struct svc_req *rqstp)
 						tabCompte[compte].serieFavorite[tabCompte[compte].nbSerieFavorite] = tabSerie[serie].idSerie;
 						printf("La serie %s a été ajouté au favoris\n",tabSerie[serie].titre);
 						tabCompte[compte].nbSerieFavorite++;
+						result=1;
 					}
 				}
 			}
