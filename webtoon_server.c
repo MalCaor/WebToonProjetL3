@@ -268,13 +268,8 @@ acheter_coin_1_svc(argAchaCoin *argp, struct svc_req *rqstp)
 					return &result;
 				}
 			}
-
-			
-
-			
 		}
 	}
-	
 
 	printf("- aucun client trouvé-\n");
 	printf("+++ End Acheter Coin +++\n\n");
