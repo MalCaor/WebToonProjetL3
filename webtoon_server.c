@@ -373,8 +373,9 @@ afficher_favoris_1_svc(compte *argp, struct svc_req *rqstp)
 int *
 supprimer_favoris_1_svc(argAchaSerie *argp, struct svc_req *rqstp)
 {
-	printf("+++ Start Supprimer Favoris +++\n\n");
+	printf("+++ Start Supprimer Favoris +++\n");
 	static int  result;
+	int favSupprime;
 
 	for(int compte=0;compte<nbCompte;compte++){
 		if(strcmp(argp->compteAcheteur.pseudo,tabCompte[compte].pseudo)==0){
@@ -382,10 +383,23 @@ supprimer_favoris_1_svc(argAchaSerie *argp, struct svc_req *rqstp)
 			for(int fav=0;fav<c.nbSerieFavorite;fav++){
 				for(int serie=0; serie<nbSerie; serie++){
 					if(c.serieFavorite[fav]==tabSerie[serie].idSerie){
-						
+						if(strcmp(argp->serieAchete.titre,tabSerie[serie].titre)==0){
+							favSupprime=fav;
+							printf("Suppression de la serie %s des favoris\n",tabSerie[serie].titre);
+							break;
+						}
 					}
 				}
 			}
+
+			if(favSupprime==c.nbSerieFavorite-1){
+				c.nbSerieFavorite--;
+			}else{
+				c.serieFavorite[favSupprime] = c.serieFavorite[c.nbSerieFavorite-1];
+				c.nbSerieFavorite--;
+			}
+
+			tabCompte[compte]=c;
 		}
 	}
 
