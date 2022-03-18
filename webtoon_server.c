@@ -374,9 +374,22 @@ ajouter_commentaire_1_svc(argAjoutComm *argp, struct svc_req *rqstp)
 {
 	static int  result;
 
-	/*
-	 * insert server code here
-	 */
+	printf("+++ Start Ajouter Commentaire +++\n");
+
+	for (size_t i = 0; i < nbCompte; i++)
+	{
+		if(strcmp(tabCompte[i].pseudo, argp->c.pseudo) == 0){
+			// le pseudo est valide
+
+			
+
+			result = 1;
+			printf("+++ End Ajouter Commentaire +++\n\n");
+			return &result;
+		}
+	}
+
+	printf("+++ End Ajouter Commentaire +++\n\n");
 
 	return &result;
 }
