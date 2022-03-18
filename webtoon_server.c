@@ -373,12 +373,23 @@ afficher_favoris_1_svc(compte *argp, struct svc_req *rqstp)
 int *
 supprimer_favoris_1_svc(argAchaSerie *argp, struct svc_req *rqstp)
 {
+	printf("+++ Start Supprimer Favoris +++\n\n");
 	static int  result;
 
-	/*
-	 * insert server code here
-	 */
+	for(int compte=0;compte<nbCompte;compte++){
+		if(strcmp(argp->compteAcheteur.pseudo,tabCompte[compte].pseudo)==0){
+			struct compte c = tabCompte[compte];
+			for(int fav=0;fav<c.nbSerieFavorite;fav++){
+				for(int serie=0; serie<nbSerie; serie++){
+					if(c.serieFavorite[fav]==tabSerie[serie].idSerie){
+						
+					}
+				}
+			}
+		}
+	}
 
+	printf("+++ End Supprimer Favoris +++\n\n");
 	return &result;
 }
 
