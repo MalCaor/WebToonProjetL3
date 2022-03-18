@@ -516,6 +516,98 @@ webtoon_prog_1(char *host)
 	}
 	printf("+++ End Ajouter Favoris +++\n\n");
 
+	printf("--------------------6--------------------\n\n");
+
+	printf("+++ Start Afficher Favoris +++\n");
+	strcpy(afficher_favoris_1_arg.pseudo,"MalCaor");
+	result_afficher_favoris = afficher_favoris_1(&afficher_favoris_1_arg, clnt);
+	if (result_afficher_favoris == (listSerie *) NULL) {
+		clnt_perror (clnt, "Afficher Favoris call failed");
+	}else{
+		if(result_afficher_favoris != NULL){
+			printf("Les Series favorites de %s\n", afficher_favoris_1_arg.pseudo);
+			for(int i=0; i<result_afficher_favoris->nbSerie; i++){
+				printf("%s\n",result_afficher_favoris->listSerie[i].titre);
+			}
+		}
+	}
+	printf("+++ End Afficher Favoris +++\n\n");
+
+	printf("--------------------7--------------------\n\n");
+
+	printf("+++ Start Ajouter Commentaire +++\n");
+	strcpy(ajouter_commentaire_1_arg.c.comm, "nul!!!");
+	strcpy(ajouter_commentaire_1_arg.c.pseudo, "MalCaor");
+	strcpy(ajouter_commentaire_1_arg.s.titre,"Le Hero");
+	result_ajouter_commentaire = ajouter_commentaire_1(&ajouter_commentaire_1_arg, clnt);
+	if (result_ajouter_commentaire == (int *) NULL) {
+		clnt_perror (clnt, "Ajouter Commentaire call failed");
+	} else {
+		if (*result_inscription == 0){
+			// echec
+			printf("ajouter_commentaire_1 echec\n");
+		}else{
+			//echec
+			printf("ajouter_commentaire_1 reussi\n");
+		}
+	}
+	printf("+++ End Ajouter Commentaire +++\n\n");
+
+	printf("--------------------8--------------------\n\n");
+
+	printf("+++ Start Ajouter Note +++\n");
+	ajouter_note_1_arg.note = 2;
+	strcpy(ajouter_note_1_arg.serieNote.titre,"Le Hero");
+	result_ajouter_note = ajouter_note_1(&ajouter_note_1_arg, clnt);
+	if (result_ajouter_note == (int *) NULL) {
+		clnt_perror (clnt, "Ajouter Note call failed");
+	} else {
+		if (*result_inscription == 0){
+			// echec
+			printf("ajouter_note_1 echec\n");
+		}else{
+			//echec
+			printf("ajouter_note_1 reussi\n");
+		}
+	}
+	printf("+++ End Ajouter Note +++\n\n");
+
+	printf("--------------------9--------------------\n\n");
+
+	printf("+++ Start Supprimer Favoris +++\n");
+	strcpy(supprimer_favoris_1_arg.serieAchete.titre,"Le Hero");
+	strcpy(supprimer_favoris_1_arg.compteAcheteur.pseudo,"MalCaor");
+	result_supprimer_favoris = supprimer_favoris_1(&supprimer_favoris_1_arg, clnt);
+	if (result_supprimer_favoris == (int *) NULL) {
+		clnt_perror (clnt, "Supprimer Favoris call failed");
+	} else {
+		if (*result_inscription == 0){
+			// echec
+			printf("supprimer_favoris_1 echec\n");
+		}else{
+			//echec
+			printf("supprimer_favoris_1 reussi\n");
+		}
+	}
+	printf("+++ End Supprimer Favoris +++\n\n");
+
+	printf("--------------------10--------------------\n\n");
+
+	printf("+++ Start Afficher Favoris +++\n");
+	strcpy(afficher_favoris_1_arg.pseudo,"MalCaor");
+	result_afficher_favoris = afficher_favoris_1(&afficher_favoris_1_arg, clnt);
+	if (result_afficher_favoris == (listSerie *) NULL) {
+		clnt_perror (clnt, "Afficher Favoris call failed");
+	}else{
+		if(result_afficher_favoris != NULL){
+			printf("Les Series favorites de %s\n", afficher_favoris_1_arg.pseudo);
+			for(int i=0; i<result_afficher_favoris->nbSerie; i++){
+				printf("%s\n",result_afficher_favoris->listSerie[i].titre);
+			}
+		}
+	}
+	printf("+++ End Afficher Favoris +++\n\n");
+
 #ifndef	DEBUG
 	clnt_destroy (clnt);
 #endif	 /* DEBUG */
