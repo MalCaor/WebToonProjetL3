@@ -378,6 +378,25 @@ webtoon_prog_1(char *host)
 	printf("--------------------18--------------------\n\n");
 
 
+	printf("+++ Start Afficher Favoris +++\n");
+	strcpy(afficher_favoris_1_arg.pseudo,"Le Narrateur");
+	result_afficher_favoris = afficher_favoris_1(&afficher_favoris_1_arg, clnt);
+	if (result_afficher_favoris == (listSerie *) NULL) {
+		clnt_perror (clnt, "Afficher Favoris call failed");
+	}else{
+		if(result_afficher_favoris != NULL){
+			printf("Les Series favorites de %s\n", afficher_favoris_1_arg.pseudo);
+			for(int i=0; i<result_afficher_favoris->nbSerie; i++){
+				printf("%s\n",result_afficher_favoris->listSerie[i].titre);
+			}
+		}
+	}
+	printf("+++ End Afficher Favoris +++\n\n");
+
+
+	printf("--------------------19--------------------\n\n");
+
+
 	printf("+++ Start Supprimer Commentaire +++\n");
 	strcpy(supprimer_commentaire_1_arg.c.comm,"sympa");
 	strcpy(supprimer_commentaire_1_arg.c.pseudo,"Le Narrateur");
