@@ -26,6 +26,7 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	s1.listGenre[0]=0;s1.listGenre[1]=2;
 	s1.dateSerie.jour=10; s1.dateSerie.mois=1; s1.dateSerie.annee=2020;
 	s1.idSerie = 0;
+	s1.nbCommentaire = 0;
 	strcpy(s1.listComm[0].comm,"Sympa"); strcpy(s1.listComm[0].pseudo,"Le Narrateur"); 
 	strcpy(s1.listComm[1].comm,"deja vu"); strcpy(s1.listComm[1].pseudo,"Malcaor"); 
 	s1.nbrVue=10;
@@ -38,6 +39,7 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	s2.listGenre[0]=0;s2.listGenre[1]=1;
 	s2.dateSerie.jour=10; s2.dateSerie.mois=1; s2.dateSerie.annee=2020;
 	s2.idSerie = 1;
+	s2.nbCommentaire = 0;
 	strcpy(s2.listComm[0].comm,"lol"); strcpy(s2.listComm[0].pseudo,"Le Narrateur"); 
 	strcpy(s2.listComm[1].comm,"Je pleurais"); strcpy(s2.listComm[1].pseudo,"Malcaor"); 
 	s2.nbrVue=10;
@@ -464,18 +466,43 @@ supprimer_commentaire_1_svc(argAjoutComm *argp, struct svc_req *rqstp)
 
 	printf("+++ Start Supprimer Commentaire +++\n");
 
-	if(argp->s.nbCommentaire == 0)
+	for (size_t y = 0; y < nbSerie; y++)
 	{
-		printf("- il n'y a pas de commentaire pour cette serie -\n");
+		if(strcmp(argp->s.titre,tabSerie[y].titre)==0){
+			// série trouvé
+			for (size_t i = 0; i < tabSerie[y].nbCommentaire; i++)
+			{
+				if(strcmp(argp->c.comm,tabSerie[y].listComm[i].comm)==0){
+					// commentaire trouvé
 
-		result = 0;
+					printf("- commentaire \" %s \" par %s supprimé -\n", tabSerie[y].listComm[i].comm, tabSerie[y].listComm[i].pseudo);
 
-		printf("+++ End Ajouter Commentaire +++\n\n");
+					// renplace le com courent par le dernier
+					strcpy(tabSerie[y].listComm[i].comm, tabSerie[y].listComm[tabSerie[y].nbCommentaire].comm);
+					strcpy(tabSerie[y].listComm[i].pseudo, tabSerie[y].listComm[tabSerie[y].nbCommentaire].pseudo);
 
-		return &result;
+					tabSerie[y].nbCommentaire--;
+
+					result = 1;
+					printf("+++ End Supprimer Commentaire +++\n\n");
+					return &result;
+				}
+			}
+			printf("- commentaire inexistante -\n");
+
+			result = 0;
+
+			printf("+++ End Supprimer Commentaire +++\n\n");
+
+			return &result;
+		}
 	}
 
-	printf("+++ End Ajouter Commentaire +++\n\n");
+	printf("- serie inexistante -\n");
+
+	result = 0;
+
+	printf("+++ End Supprimer Commentaire +++\n\n");
 
 	return &result;
 }
