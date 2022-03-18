@@ -105,16 +105,15 @@ webtoon_prog_1(char *host)
 
 
 	printf("+++ Start Afficher Series +++\n");
-	strcpy(afficher_serie_1_arg.genreChoisi.nomGenre, "peur");
 	*afficher_serie_1_arg.genreChoisi.nomGenre = 1;
 	result_afficher_serie = afficher_serie_1(&afficher_serie_1_arg, clnt);
 	if (result_afficher_serie == (listSerie *) NULL) {
 		clnt_perror (clnt, "Afficher Serie call failed");
 	}else{
 		if(result_afficher_serie != NULL){
-			printf("Les Series : %s\n", afficher_serie_1_arg.genreChoisi.nomGenre);
+			printf("Les Series :\n");
 			for(int i=0; i<result_afficher_serie->nbSerie; i++){
-				printf("%s\n",result_afficher_serie->listSerie[i].titre);
+				printf(" - %s\n",result_afficher_serie->listSerie[i].titre);
 			}
 		}
 	}
