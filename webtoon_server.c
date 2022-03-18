@@ -122,21 +122,24 @@ listSerie *
 afficher_serie_1_svc(argTri *argp, struct svc_req *rqstp)
 {
 	static listSerie  result;
-	printf("test %s\n", argp->genreChoisi.nomGenre);
+	result.nbSerie=0;
 	printf("+++ Start Afficher Serie +++\n");
+	printf("Genre choisi : %s\n",argp->genreChoisi.nomGenre);
 	
-	for (size_t i = 0; i < nbSerie; i++){
-		result.listSerie[i] = tabSerie[i];
+	for(int serie=0;serie<nbSerie;serie++){
+		for(int genreSerie=0;genreSerie<nbGenre;genreSerie++){
+			for(int g=0;g<nbGenre;g++){
+				if(strcmp(tabGenre[g].nomGenre,argp->genreChoisi.nomGenre)==0){
+					if(tabSerie[serie].listGenre[genreSerie]==tabGenre[g].idGenre){
+						result.listSerie[result.nbSerie]=tabSerie[serie];
+						printf("Ajout de %s à la liste\n",tabSerie[serie].titre);
+						result.nbSerie++;
+						break;
+					}
+				}
+			}
+		}
 	}
-
-	result.nbSerie = nbSerie;
-	
-	printf("send %i serie\n", result.nbSerie);
-	printf("--- test Result ---\n");
-	for (size_t i = 0; i < result.nbSerie; i++){
-		printf("- serie : %s\n", result.listSerie[i].titre);
-	}
-	
 
 	printf("+++ End Afficher Serie +++\n\n");
 

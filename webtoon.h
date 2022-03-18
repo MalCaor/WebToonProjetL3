@@ -29,7 +29,7 @@ typedef struct date date;
 
 struct genre {
 	int idGenre;
-	char nomGenre[15];
+	char nomGenre[10];
 };
 typedef struct genre genre;
 
