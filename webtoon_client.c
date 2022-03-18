@@ -46,6 +46,8 @@ webtoon_prog_1(char *host)
 	}
 #endif	/* DEBUG */
 
+	printf("##### SENARIO 1 ##### \n\n");
+
 	printf("--------------------1--------------------\n\n");
 
 	result_init = init_1((void*)&init_1_arg, clnt);
@@ -413,6 +415,106 @@ webtoon_prog_1(char *host)
 		}
 	}
 	printf("+++ End Supprimer Commentaire +++\n");
+
+
+	// SENARIO 2
+
+	printf("\n\n##### SENARIO 2 ##### \n\n");
+
+	printf("--------------------1--------------------\n\n");
+
+	strcpy(inscription_1_arg.pseudo,"MalCaor");
+	strcpy(inscription_1_arg.mdp,"ui");
+	inscription_1_arg.carteBancaire=1235487;
+	inscription_1_arg.coin=50;
+	result_inscription = inscription_1(&inscription_1_arg, clnt);
+	printf("+++ Start Add User +++\n");
+	if (result_inscription == (int *) NULL) {
+		clnt_perror (clnt, "Inscription call failed");
+	} else {
+		if (*result_inscription == 0){
+			// echec
+			printf("Inscription echec\n");
+		}else{
+			//echec
+			printf("Inscription reussie\n");
+		}
+	}
+	printf("+++ End Add User +++\n\n");
+
+	printf("--------------------2--------------------\n\n");
+
+	printf("+++ Start Afficher Coin +++\n");
+	result_afficher_coin = afficher_coin_1(&inscription_1_arg, clnt);
+	if (result_afficher_coin == (int *) NULL) {
+		clnt_perror (clnt, "Afficher Coincall failed");
+	}else{
+		printf("Vous avez : %d coin(s) \n",*result_afficher_coin);
+	}
+	printf("+++ End Afficher Coin +++\n\n");
+
+	printf("+++ Start Acheter Series +++\n");
+	acheter_serie_1_arg.compteAcheteur = inscription_1_arg;
+	result_acheter_serie = acheter_serie_1(&acheter_serie_1_arg, clnt);
+	if (result_acheter_serie == (int *) NULL) {
+		clnt_perror (clnt, "Acheter Serie call failed");
+	} else {
+		if (*result_acheter_serie == 0){
+			// echec
+			printf("acheter_serie_1 echec\n");
+		}else{
+			//echec
+			printf("acheter_serie_1 reussi\n");
+		}
+	}
+	printf("+++ End Acheter Series +++\n\n");
+
+	printf("--------------------3--------------------\n\n");
+
+	printf("+++ Start Afficher Coin +++\n");
+	result_afficher_coin = afficher_coin_1(&inscription_1_arg, clnt);
+	if (result_afficher_coin == (int *) NULL) {
+		clnt_perror (clnt, "Afficher Coincall failed");
+	}else{
+		printf("Vous avez : %d coin(s) \n",*result_afficher_coin);
+	}
+	printf("+++ End Afficher Coin +++\n\n");
+
+	printf("--------------------4--------------------\n\n");
+
+	printf("+++ Start Afficher Series +++\n");
+	*afficher_serie_1_arg.genreChoisi.nomGenre = 1;
+	result_afficher_serie = afficher_serie_1(&afficher_serie_1_arg, clnt);
+	if (result_afficher_serie == (listSerie *) NULL) {
+		clnt_perror (clnt, "Afficher Serie call failed");
+	}else{
+		if(result_afficher_serie != NULL){
+			printf("Les Series :\n");
+			for(int i=0; i<result_afficher_serie->nbSerie; i++){
+				printf(" - %s\n",result_afficher_serie->listSerie[i].titre);
+			}
+		}
+	}
+	printf("+++ End Afficher Series +++\n\n");
+
+	printf("--------------------5--------------------\n\n");
+
+	printf("+++ Start Ajouter Favoris +++\n");
+	strcpy(ajouter_favoris_1_arg.serieAchete.titre,"Le Hero");
+	strcpy(ajouter_favoris_1_arg.compteAcheteur.pseudo,"MalCaor");
+	result_ajouter_favoris = ajouter_favoris_1(&ajouter_favoris_1_arg, clnt);
+	if (result_ajouter_favoris == (int *) NULL) {
+		clnt_perror (clnt, "Ajouter Favoris call failed");
+	} else {
+		if (*result_ajouter_favoris == 0){
+			// echec
+			printf("ajouter_favoris_1 echec\n");
+		}else{
+			//echec
+			printf("ajouter_favoris_1 reussi\n");
+		}
+	}
+	printf("+++ End Ajouter Favoris +++\n\n");
 
 #ifndef	DEBUG
 	clnt_destroy (clnt);
