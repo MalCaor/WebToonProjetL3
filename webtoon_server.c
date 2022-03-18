@@ -389,18 +389,35 @@ ajouter_commentaire_1_svc(argAjoutComm *argp, struct svc_req *rqstp)
 
 	printf("+++ Start Ajouter Commentaire +++\n");
 
+	if(argp->s.nbCommentaire == 5){
+		printf("- nombre de commentaire maximum dépassé -\n");
+
+		result = 0;
+
+		printf("+++ End Ajouter Commentaire +++\n\n");
+
+		return &result;
+	}
+
 	for (size_t i = 0; i < nbCompte; i++)
 	{
 		if(strcmp(tabCompte[i].pseudo, argp->c.pseudo) == 0){
 			// le pseudo est valide
 
-			
+			argp->s.listComm[argp->s.nbCommentaire] = argp->c;
+			argp->s.nbCommentaire++;
+
+			printf("- commentaire \" %s \" par %s ajouté -\n", argp->c.comm, argp->c.pseudo);
 
 			result = 1;
 			printf("+++ End Ajouter Commentaire +++\n\n");
 			return &result;
 		}
 	}
+
+	printf("- pseudo invalide -\n");
+
+	result = 0;
 
 	printf("+++ End Ajouter Commentaire +++\n\n");
 
