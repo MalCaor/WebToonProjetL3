@@ -23,7 +23,6 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 
 	struct serie s1;
 	strcpy(s1.titre, "Le Hero");
-	s1.noteMoyenne;
 	s1.listGenre[0]=0;s1.listGenre[1]=2;
 	s1.dateSerie.jour=10; s1.dateSerie.mois=1; s1.dateSerie.annee=2020;
 	s1.idSerie = 0;
@@ -31,11 +30,11 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	strcpy(s1.listComm[1].comm,"deja vu"); strcpy(s1.listComm[1].pseudo,"Malcaor"); 
 	s1.nbrVue=10;
 	s1.nbEpisode=3;
+	s1.noteMoyenne=0;
 	strcpy(s1.description, "Une ");
 
 	struct serie s2;
 	strcpy(s2.titre, "Locked");
-	s2.noteMoyenne;
 	s2.listGenre[0]=0;s2.listGenre[1]=1;
 	s2.dateSerie.jour=10; s2.dateSerie.mois=1; s2.dateSerie.annee=2020;
 	s2.idSerie = 1;
@@ -43,6 +42,8 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	strcpy(s2.listComm[1].comm,"Je pleurais"); strcpy(s2.listComm[1].pseudo,"Malcaor"); 
 	s2.nbrVue=10;
 	s2.nbEpisode=3;
+	s2.noteMoyenne=15;
+	
 	strcpy(s2.description, "A l'aide.\n");
 
 	tabSerie[nbSerie] = s1;
@@ -76,10 +77,14 @@ inscription_1_svc(compte *argp, struct svc_req *rqstp)
 	printf("- mdp : %s\n", c->mdp);
 	if(argp->carteBancaire>0){
 		c->carteBancaire = argp->carteBancaire;
-		printf("- carte bancaire : %i\n", c->carteBancaire);
+	}else{
+		c->carteBancaire = 0;
 	}
+	printf("- carte bancaire : %i\n", c->carteBancaire);
 	c->coin = argp->coin;
 	printf("- coin : %i\n", c->coin);
+
+	
 	
 	tabCompte[nbCompte] = *c;
 	if(&tabCompte[nbCompte] != NULL){result=1;nbCompte++;}else{result=0;}
@@ -141,9 +146,9 @@ acheter_serie_1_svc(argAchaSerie *argp, struct svc_req *rqstp)
 {
 	static int  result;
 
-	printf("+++ Start Ach Serie +++\n");
+	printf("+++ Start Acheter Serie +++\n");
 
-	if(argp->compteAcheteur.coin < 50){
+	/*if(argp->compteAcheteur.coin < 50){
 		printf("- Acheteur trop pauvre -\n");
 		// pas asser de coin
 		result = 0;
@@ -151,12 +156,13 @@ acheter_serie_1_svc(argAchaSerie *argp, struct svc_req *rqstp)
 	}
 
 	int i = 0;
-	while (argp->compteAcheteur.serieFavorite[i] >= 0)
+	while (argp->compteAcheteur.serieAchete[i] >= 0)
 	{
-		if(argp->compteAcheteur.serieFavorite[i] == argp->serieAchete.idSerie){
+		if(argp->compteAcheteur.serieAchete[i] == argp->serieAchete.idSerie){
 			printf("- Acheteur a déjà la serie -\n");
 			// déjà acheté
 			result = 0;
+			printf("+++ End Acheter Serie +++\n\n");
 			return &result;
 		}
 		i++;
@@ -164,14 +170,20 @@ acheter_serie_1_svc(argAchaSerie *argp, struct svc_req *rqstp)
 	
 	// transaction
 	argp->compteAcheteur.coin -= 50;
-	argp->compteAcheteur.serieFavorite[i] = argp->serieAchete.idSerie;
+	argp->compteAcheteur.serieAchete[i] = argp->serieAchete.idSerie;
 
 	printf("- Transaction Effectué -\n");
 	printf("- %s ajouté au compte du client -\n", argp->serieAchete.titre);
 
-	result = 1;
+	result = 1;*/
 
-	printf("+++ End Ach Serie +++\n\n");
+	for(int i=0;i<nbCompte;i++){
+		if(strcmp(argp->compteAcheteur.pseudo,tabCompte[i].pseudo)==0){
+			
+		}
+	}
+
+	printf("+++ End Acheter Serie +++\n\n");
 
 	return &result;
 }
@@ -179,11 +191,26 @@ acheter_serie_1_svc(argAchaSerie *argp, struct svc_req *rqstp)
 int *
 ajouter_note_1_svc(argAjouterNote *argp, struct svc_req *rqstp)
 {
-	static int  result;
+	printf("+++ Start Ajouter Note +++\n");
+	printf("Serie a trouver : %s\n", argp->serieNote.titre);
 
-	/*
-	 * insert server code here
-	 */
+	static int  result=0;
+
+	for(int i=0;i<nbSerie;i++){
+		if(strcmp(argp->serieNote.titre,tabSerie[i].titre)==0){
+			printf("La serie a une note de : %f\n",tabSerie[i].noteMoyenne);
+			if(tabSerie[i].noteMoyenne == 0){
+				tabSerie[i].noteMoyenne = (double)argp->note;
+			}else{
+				tabSerie[i].noteMoyenne = (tabSerie[i].noteMoyenne+(double)argp->note)/2;
+			}
+			printf("La note de %d a été ajouté a la serie %s\n",argp->note,tabSerie[i].titre);
+			printf("La serie a maintenant une note de : %f\n",tabSerie[i].noteMoyenne);
+			result=1;
+		}
+	}
+
+	printf("+++ End Ajouter Note +++\n\n");
 
 	return &result;
 }
@@ -193,12 +220,13 @@ acheter_coin_1_svc(argAchaCoin *argp, struct svc_req *rqstp)
 {
 	static int  result;
 
-	printf("+++ Start Ach Coin +++\n");
+	printf("+++ Start Acheter Coin +++\n");
 
 	if(argp->nbCoin <=0){
 		printf("- nb coin negatif -\n");
 		// nb Coin negatif
 		result = 0;
+		printf("+++ End Acheter Coin +++\n\n");
 		return &result;
 	}
 
@@ -213,23 +241,27 @@ acheter_coin_1_svc(argAchaCoin *argp, struct svc_req *rqstp)
 				printf("- pas de carte bancaire -\n");
 				// pas de carte bancaire
 				result = 0;
+				printf("+++ End Acheter Coin +++\n\n");
+				return &result;
+			}else{
+				tabCompte[i].coin += argp->nbCoin;
+				printf("- Transaction Effectué -\n");
+				printf("- %i coins ajouté au compte du client -\n", argp->nbCoin);
+
+				printf("+++ End Acheter Coin +++\n\n");
+
+				result = 1;
+
 				return &result;
 			}
 
-			tabCompte[i].coin += argp->nbCoin;
-			printf("- Transaction Effectué -\n");
-			printf("- %i coins ajouté au compte du client -\n", argp->nbCoin);
-
-			printf("+++ End Ach Serie +++\n\n");
-
-			result = 1;
-
-			return &result;
+			
 		}
 	}
 	
 
 	printf("- aucun client trouvé-\n");
+	printf("+++ End Acheter Coin +++\n\n");
 
 	result = 0;
 
@@ -241,7 +273,7 @@ afficher_coin_1_svc(compte *argp, struct svc_req *rqstp)
 {
 	static int  result;
 
-	printf("+++ Start Aff Coin +++\n");
+	printf("+++ Start Afficher Coin +++\n");
 
 	printf("pseudo a trouver : %s\n", argp->pseudo);
 
@@ -252,13 +284,14 @@ afficher_coin_1_svc(compte *argp, struct svc_req *rqstp)
 
 			result = tabCompte[i].coin;
 
+			printf("+++ End Afficher Coin +++\n\n");
 			return &result;
 		}
 	}
 
 	result = -1;
 
-	printf("+++ End Aff Coin +++\n\n");
+	printf("+++ End Afficher Coin +++\n\n");
 
 	return &result;
 }
