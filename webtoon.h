@@ -39,6 +39,7 @@ struct serie {
 	double noteMoyenne;
 	int listGenre[10];
 	date dateSerie;
+	int nbCommentaire;
 	commentaire listComm[5];
 	int nbrVue;
 	int nbEpisode;

@@ -2,7 +2,7 @@ struct commentaire{char pseudo[15]; char comm[15];};
 struct date{int jour; int mois; int annee;};
 struct genre{int idGenre; char nomGenre[15];};
 
-struct serie{int idSerie; char titre[10]; double noteMoyenne; int listGenre[10]; date dateSerie; commentaire listComm[5]; int nbrVue; int nbEpisode; char description[10];};
+struct serie{int idSerie; char titre[10]; double noteMoyenne; int listGenre[10]; date dateSerie; int nbCommentaire; commentaire listComm[5]; int nbrVue; int nbEpisode; char description[10];};
 struct argAjoutComm{serie s; commentaire c;};
 struct argAjouterNote{serie serieNote; int note;};
 struct argTri{int tri; genre genreChoisi;};

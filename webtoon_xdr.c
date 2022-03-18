@@ -81,6 +81,8 @@ xdr_serie (XDR *xdrs, serie *objp)
 		}
 		 if (!xdr_date (xdrs, &objp->dateSerie))
 			 return FALSE;
+		 if (!xdr_int (xdrs, &objp->nbCommentaire))
+			 return FALSE;
 		 if (!xdr_vector (xdrs, (char *)objp->listComm, 5,
 			sizeof (commentaire), (xdrproc_t) xdr_commentaire))
 			 return FALSE;
@@ -118,6 +120,8 @@ xdr_serie (XDR *xdrs, serie *objp)
 		}
 		 if (!xdr_date (xdrs, &objp->dateSerie))
 			 return FALSE;
+		 if (!xdr_int (xdrs, &objp->nbCommentaire))
+			 return FALSE;
 		 if (!xdr_vector (xdrs, (char *)objp->listComm, 5,
 			sizeof (commentaire), (xdrproc_t) xdr_commentaire))
 			 return FALSE;
@@ -142,6 +146,8 @@ xdr_serie (XDR *xdrs, serie *objp)
 		sizeof (int), (xdrproc_t) xdr_int))
 		 return FALSE;
 	 if (!xdr_date (xdrs, &objp->dateSerie))
+		 return FALSE;
+	 if (!xdr_int (xdrs, &objp->nbCommentaire))
 		 return FALSE;
 	 if (!xdr_vector (xdrs, (char *)objp->listComm, 5,
 		sizeof (commentaire), (xdrproc_t) xdr_commentaire))
