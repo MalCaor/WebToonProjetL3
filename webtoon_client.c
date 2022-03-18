@@ -125,7 +125,7 @@ webtoon_prog_1(char *host)
 
 
 	printf("+++ Start Acheter Series +++\n");
-	acheter_serie_1_arg.serieAchete.idSerie=1;
+	strcpy(acheter_serie_1_arg.serieAchete.titre,"Locked");
 	strcpy(acheter_serie_1_arg.compteAcheteur.pseudo,"Le Narrateur");
 	result_acheter_serie = acheter_serie_1(&acheter_serie_1_arg, clnt);
 	if (result_acheter_serie == (int *) NULL) {

@@ -172,7 +172,7 @@ acheter_serie_1_svc(argAchaSerie *argp, struct svc_req *rqstp)
 						}
 					}
 				}
-
+				printf("dejaAcheter = %d\n",dejaAchete);
 				if(dejaAchete==0){
 					for(int lesSeries=0;lesSeries<nbSerie;lesSeries++){
 						if(strcmp(argp->serieAchete.titre,tabSerie[lesSeries].titre)==0){
