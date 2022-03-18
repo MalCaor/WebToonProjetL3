@@ -26,7 +26,7 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	s1.listGenre[0]=0;s1.listGenre[1]=2;
 	s1.dateSerie.jour=10; s1.dateSerie.mois=1; s1.dateSerie.annee=2020;
 	s1.idSerie = 0;
-	s1.nbCommentaire = 0;
+	s1.nbCommentaire = 2;
 	strcpy(s1.listComm[0].comm,"Sympa"); strcpy(s1.listComm[0].pseudo,"Le Narrateur"); 
 	strcpy(s1.listComm[1].comm,"deja vu"); strcpy(s1.listComm[1].pseudo,"Malcaor"); 
 	s1.nbrVue=10;
@@ -34,17 +34,30 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	s1.noteMoyenne=0;
 	strcpy(s1.description, "Une ");
 
+	struct serie s3;
+	strcpy(s3.titre, "Ghost");
+	s3.listGenre[0]=0; s3.listGenre[1]=1;
+	s3.dateSerie.jour=10; s3.dateSerie.mois=1; s3.dateSerie.annee=2020;
+	s3.idSerie = 1;
+	s3.nbCommentaire = 2;
+	strcpy(s3.listComm[0].comm,"lol"); strcpy(s3.listComm[0].pseudo,"Le Narrateur"); 
+	strcpy(s3.listComm[1].comm,"Je pleurais"); strcpy(s3.listComm[1].pseudo,"Malcaor"); 
+	s3.nbrVue=10;
+	s3.nbEpisode=3;
+	s3.noteMoyenne=15;
+
+
 	struct serie s2;
 	strcpy(s2.titre, "Locked");
-	s2.listGenre[0]=0;s2.listGenre[1]=1;
+	s2.listGenre[0]=2;s2.listGenre[1]=1;
 	s2.dateSerie.jour=10; s2.dateSerie.mois=1; s2.dateSerie.annee=2020;
 	s2.idSerie = 1;
-	s2.nbCommentaire = 0;
+	s2.nbCommentaire = 2;
 	strcpy(s2.listComm[0].comm,"lol"); strcpy(s2.listComm[0].pseudo,"Le Narrateur"); 
 	strcpy(s2.listComm[1].comm,"Je pleurais"); strcpy(s2.listComm[1].pseudo,"Malcaor"); 
-	s2.nbrVue=10;
+	s2.nbrVue=15;
 	s2.nbEpisode=3;
-	s2.noteMoyenne=15;
+	s2.noteMoyenne=3;
 	
 	strcpy(s2.description, "A l'aide.\n");
 
@@ -52,12 +65,14 @@ init_1_svc(void *argp, struct svc_req *rqstp)
 	nbSerie++;
 	tabSerie[nbSerie] = s2;
 	nbSerie++;
+	tabSerie[nbSerie] = s3;
+	nbSerie++;
 
 	tabGenre[0].idGenre = 0;
 	strcpy(tabGenre[0].nomGenre,"rire");
 	tabGenre[1].idGenre = 1;
 	strcpy(tabGenre[1].nomGenre,"peur");
-	tabGenre[0].idGenre = 0;
+	tabGenre[0].idGenre = 2;
 	strcpy(tabGenre[0].nomGenre,"film");
 	nbGenre=3;
 
