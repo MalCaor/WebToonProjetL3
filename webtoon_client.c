@@ -46,7 +46,7 @@ webtoon_prog_1(char *host)
 	}
 #endif	/* DEBUG */
 
-	printf("##### SENARIO 1 ##### \n\n");
+	printf("##### SCENARIO 1 ##### \n\n");
 
 	printf("--------------------1--------------------\n\n");
 
@@ -419,7 +419,7 @@ webtoon_prog_1(char *host)
 
 	// SENARIO 2
 
-	printf("\n\n##### SENARIO 2 ##### \n\n");
+	printf("\n\n##### SCENARIO 2 ##### \n\n");
 
 	printf("--------------------1--------------------\n\n");
 
