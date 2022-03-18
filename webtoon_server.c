@@ -82,6 +82,8 @@ inscription_1_svc(compte *argp, struct svc_req *rqstp)
 	}
 	printf("- carte bancaire : %i\n", c->carteBancaire);
 	c->coin = argp->coin;
+	c->nbSerieAchete=0;
+	c->nbSerieFavorite=0;
 	printf("- coin : %i\n", c->coin);
 
 	
@@ -121,7 +123,7 @@ afficher_serie_1_svc(argTri *argp, struct svc_req *rqstp)
 {
 	static listSerie  result;
 	printf("test %s\n", argp->genreChoisi.nomGenre);
-	printf("+++ Start Aff Serie +++\n");
+	printf("+++ Start Afficher Serie +++\n");
 	
 	for (size_t i = 0; i < nbSerie; i++){
 		result.listSerie[i] = tabSerie[i];
@@ -136,7 +138,7 @@ afficher_serie_1_svc(argTri *argp, struct svc_req *rqstp)
 	}
 	
 
-	printf("+++ End Aff Serie +++\n\n");
+	printf("+++ End Afficher Serie +++\n\n");
 
 	return &result;
 }
@@ -147,39 +149,48 @@ acheter_serie_1_svc(argAchaSerie *argp, struct svc_req *rqstp)
 	static int  result;
 
 	printf("+++ Start Acheter Serie +++\n");
-
-	/*if(argp->compteAcheteur.coin < 50){
-		printf("- Acheteur trop pauvre -\n");
-		// pas asser de coin
-		result = 0;
-		return &result;
-	}
-
-	int i = 0;
-	while (argp->compteAcheteur.serieAchete[i] >= 0)
-	{
-		if(argp->compteAcheteur.serieAchete[i] == argp->serieAchete.idSerie){
-			printf("- Acheteur a déjà la serie -\n");
-			// déjà acheté
-			result = 0;
-			printf("+++ End Acheter Serie +++\n\n");
-			return &result;
-		}
-		i++;
-	}
-	
-	// transaction
-	argp->compteAcheteur.coin -= 50;
-	argp->compteAcheteur.serieAchete[i] = argp->serieAchete.idSerie;
-
-	printf("- Transaction Effectué -\n");
-	printf("- %s ajouté au compte du client -\n", argp->serieAchete.titre);
-
-	result = 1;*/
+	printf("compte a trouver : %s\n",argp->compteAcheteur.pseudo);
 
 	for(int i=0;i<nbCompte;i++){
 		if(strcmp(argp->compteAcheteur.pseudo,tabCompte[i].pseudo)==0){
-			
+			printf("Compte trouvé\n");
+			if(tabCompte[i].coin>=50){
+				int dejaAchete = 0;
+
+				//on regarde si la serie est deja achté
+				//1 on parcours la liste des serie deja acheté par le comte
+				for(int serieAchete=0;serieAchete<tabCompte[i].nbSerieAchete;serieAchete++){
+					//2 on parcours la liste de toutes le series
+					for(int lesSeries=0;lesSeries<nbSerie;lesSeries++){
+						//3 on compare les titres de la series qu'on regarde actuellement (tabSerie[lesSeries]) et la serie qu'on essai d'ajouter
+						if(strcmp(argp->serieAchete.titre,tabSerie[lesSeries].titre)==0){
+							//4 on regarde si la serie qu'on regarde actuellement (tabSerie[lesSeries]) est deja dans les series acheté ou non
+							if(tabCompte[i].serieAchete[serieAchete]==tabSerie[lesSeries].idSerie){
+								dejaAchete=1;
+								printf("- serie deja acheté -\n");
+							}
+						}
+					}
+				}
+
+				if(dejaAchete==0){
+					for(int lesSeries=0;lesSeries<nbSerie;lesSeries++){
+						if(strcmp(argp->serieAchete.titre,tabSerie[lesSeries].titre)==0){
+							tabCompte[i].coin -= 50;
+							result=1;
+							tabCompte[i].serieAchete[tabCompte[i].nbSerieAchete] = tabSerie[lesSeries].idSerie;
+							printf("- Transaction Effectué -\n");
+							printf("- %s ajouté au compte du client -\n", tabSerie[lesSeries].titre);
+
+						}
+					}
+				}
+			}else{
+				printf("- Acheteur trop pauvre -\n");
+				// pas asser de coin
+				result = 0;
+			}
+
 		}
 	}
 
@@ -222,13 +233,7 @@ acheter_coin_1_svc(argAchaCoin *argp, struct svc_req *rqstp)
 
 	printf("+++ Start Acheter Coin +++\n");
 
-	if(argp->nbCoin <=0){
-		printf("- nb coin negatif -\n");
-		// nb Coin negatif
-		result = 0;
-		printf("+++ End Acheter Coin +++\n\n");
-		return &result;
-	}
+	
 
 	printf("pseudo a trouver : %s\n", argp->compteAcheteur.pseudo);
 
@@ -237,23 +242,33 @@ acheter_coin_1_svc(argAchaCoin *argp, struct svc_req *rqstp)
 		if(strcmp(tabCompte[i].pseudo, argp->compteAcheteur.pseudo) == 0){
 			// compte trouvé
 
-			if(argp->compteAcheteur.carteBancaire <=0){
-				printf("- pas de carte bancaire -\n");
-				// pas de carte bancaire
+			if(argp->nbCoin <=0){
+				printf("- nb coin negatif -\n");
+				// nb Coin negatif
 				result = 0;
 				printf("+++ End Acheter Coin +++\n\n");
 				return &result;
 			}else{
-				tabCompte[i].coin += argp->nbCoin;
-				printf("- Transaction Effectué -\n");
-				printf("- %i coins ajouté au compte du client -\n", argp->nbCoin);
+				if(tabCompte[i].carteBancaire <=0){
+					printf("- pas de carte bancaire -\n");
+					// pas de carte bancaire
+					result = 0;
+					printf("+++ End Acheter Coin +++\n\n");
+					return &result;
+				}else{
+					tabCompte[i].coin += argp->nbCoin;
+					printf("- Transaction Effectué -\n");
+					printf("- %i coins ajouté au compte du client -\n", argp->nbCoin);
 
-				printf("+++ End Acheter Coin +++\n\n");
+					printf("+++ End Acheter Coin +++\n\n");
 
-				result = 1;
+					result = 1;
 
-				return &result;
+					return &result;
+				}
 			}
+
+			
 
 			
 		}

@@ -220,12 +220,16 @@ xdr_compte (XDR *xdrs, compte *objp)
 		 if (!xdr_vector (xdrs, (char *)objp->mdp, 15,
 			sizeof (char), (xdrproc_t) xdr_char))
 			 return FALSE;
-		buf = XDR_INLINE (xdrs, (2 +  15  + 15 )* BYTES_PER_XDR_UNIT);
+		buf = XDR_INLINE (xdrs, (4 +  15  + 15 )* BYTES_PER_XDR_UNIT);
 		if (buf == NULL) {
 			 if (!xdr_int (xdrs, &objp->carteBancaire))
 				 return FALSE;
+			 if (!xdr_int (xdrs, &objp->nbSerieFavorite))
+				 return FALSE;
 			 if (!xdr_vector (xdrs, (char *)objp->serieFavorite, 15,
 				sizeof (int), (xdrproc_t) xdr_int))
+				 return FALSE;
+			 if (!xdr_int (xdrs, &objp->nbSerieAchete))
 				 return FALSE;
 			 if (!xdr_vector (xdrs, (char *)objp->serieAchete, 15,
 				sizeof (int), (xdrproc_t) xdr_int))
@@ -234,6 +238,7 @@ xdr_compte (XDR *xdrs, compte *objp)
 				 return FALSE;
 		} else {
 			IXDR_PUT_LONG(buf, objp->carteBancaire);
+			IXDR_PUT_LONG(buf, objp->nbSerieFavorite);
 			{
 				register int *genp;
 
@@ -242,6 +247,7 @@ xdr_compte (XDR *xdrs, compte *objp)
 					IXDR_PUT_LONG(buf, *genp++);
 				}
 			}
+			IXDR_PUT_LONG(buf, objp->nbSerieAchete);
 			{
 				register int *genp;
 
@@ -260,12 +266,16 @@ xdr_compte (XDR *xdrs, compte *objp)
 		 if (!xdr_vector (xdrs, (char *)objp->mdp, 15,
 			sizeof (char), (xdrproc_t) xdr_char))
 			 return FALSE;
-		buf = XDR_INLINE (xdrs, (2 +  15  + 15 )* BYTES_PER_XDR_UNIT);
+		buf = XDR_INLINE (xdrs, (4 +  15  + 15 )* BYTES_PER_XDR_UNIT);
 		if (buf == NULL) {
 			 if (!xdr_int (xdrs, &objp->carteBancaire))
 				 return FALSE;
+			 if (!xdr_int (xdrs, &objp->nbSerieFavorite))
+				 return FALSE;
 			 if (!xdr_vector (xdrs, (char *)objp->serieFavorite, 15,
 				sizeof (int), (xdrproc_t) xdr_int))
+				 return FALSE;
+			 if (!xdr_int (xdrs, &objp->nbSerieAchete))
 				 return FALSE;
 			 if (!xdr_vector (xdrs, (char *)objp->serieAchete, 15,
 				sizeof (int), (xdrproc_t) xdr_int))
@@ -274,6 +284,7 @@ xdr_compte (XDR *xdrs, compte *objp)
 				 return FALSE;
 		} else {
 			objp->carteBancaire = IXDR_GET_LONG(buf);
+			objp->nbSerieFavorite = IXDR_GET_LONG(buf);
 			{
 				register int *genp;
 
@@ -282,6 +293,7 @@ xdr_compte (XDR *xdrs, compte *objp)
 					*genp++ = IXDR_GET_LONG(buf);
 				}
 			}
+			objp->nbSerieAchete = IXDR_GET_LONG(buf);
 			{
 				register int *genp;
 
@@ -303,8 +315,12 @@ xdr_compte (XDR *xdrs, compte *objp)
 		 return FALSE;
 	 if (!xdr_int (xdrs, &objp->carteBancaire))
 		 return FALSE;
+	 if (!xdr_int (xdrs, &objp->nbSerieFavorite))
+		 return FALSE;
 	 if (!xdr_vector (xdrs, (char *)objp->serieFavorite, 15,
 		sizeof (int), (xdrproc_t) xdr_int))
+		 return FALSE;
+	 if (!xdr_int (xdrs, &objp->nbSerieAchete))
 		 return FALSE;
 	 if (!xdr_vector (xdrs, (char *)objp->serieAchete, 15,
 		sizeof (int), (xdrproc_t) xdr_int))

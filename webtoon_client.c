@@ -46,6 +46,8 @@ webtoon_prog_1(char *host)
 	}
 #endif	/* DEBUG */
 
+	printf("--------------------1--------------------\n\n");
+
 	result_init = init_1((void*)&init_1_arg, clnt);
 	printf("+++ Start Server Init +++\n");
 	if (result_init == (void *) NULL) {
@@ -55,6 +57,7 @@ webtoon_prog_1(char *host)
 	}
 	printf("+++ End Server Init +++\n\n");
 	
+	printf("--------------------2--------------------\n\n");
 
 	strcpy(inscription_1_arg.pseudo,"Le Narrateur");
 	strcpy(inscription_1_arg.mdp,"1234");
@@ -75,6 +78,10 @@ webtoon_prog_1(char *host)
 	}
 	printf("+++ End Add User +++\n\n");
 
+
+	printf("--------------------3--------------------\n\n");
+
+
 	// update mdp with abcd
 	maj_info_1_arg = inscription_1_arg;
 	strcpy(maj_info_1_arg.mdp,"abcd");
@@ -93,6 +100,10 @@ webtoon_prog_1(char *host)
 	}
 	printf("+++ End Maj Info +++\n\n");
 	
+
+	printf("--------------------4--------------------\n\n");
+
+
 	printf("+++ Start Afficher Series +++\n");
 	strcpy(afficher_serie_1_arg.genreChoisi.nomGenre, "rire");
 	*afficher_serie_1_arg.genreChoisi.nomGenre = 1;
@@ -110,6 +121,9 @@ webtoon_prog_1(char *host)
 	printf("+++ End Afficher Series +++\n\n");
 	
 
+	printf("--------------------5--------------------\n\n");
+
+
 	printf("+++ Start Acheter Series +++\n");
 	acheter_serie_1_arg.serieAchete.idSerie=1;
 	strcpy(acheter_serie_1_arg.compteAcheteur.pseudo,"Le Narrateur");
@@ -126,6 +140,9 @@ webtoon_prog_1(char *host)
 		}
 	}
 	printf("+++ End Acheter Series +++\n\n");
+
+
+	printf("--------------------6--------------------\n\n");
 
 
 	printf("+++ Start Acheter Coin +++\n");
@@ -146,6 +163,9 @@ webtoon_prog_1(char *host)
 	printf("+++ End Acheter Coin +++\n\n");
 
 
+	printf("--------------------7--------------------\n\n");
+
+
 	printf("+++ Start Maj Info +++\n");
 	maj_info_1_arg.carteBancaire = 123412341;
 	result_maj_info = maj_info_1(&maj_info_1_arg, clnt);
@@ -161,6 +181,10 @@ webtoon_prog_1(char *host)
 		}
 	}
 	printf("+++ End Maj Info +++\n\n");
+
+
+	printf("--------------------8--------------------\n\n");
+
 
 	printf("+++ Start Acheter Coin +++\n");
 	// acheter_coin_1_arg est deja remplie au premier appel
@@ -179,6 +203,10 @@ webtoon_prog_1(char *host)
 	}
 	printf("+++ End Acheter Coin +++\n\n");
 
+
+	printf("--------------------9--------------------\n\n");
+
+
 	printf("+++ Start Afficher Coin +++\n");
 	strcpy(afficher_coin_1_arg.pseudo,"Le Narrateur");
 	result_afficher_coin = afficher_coin_1(&afficher_coin_1_arg, clnt);
@@ -190,6 +218,41 @@ webtoon_prog_1(char *host)
 	printf("+++ End Afficher Coin +++\n\n");
 
 	
+	printf("--------------------10--------------------\n\n");
+
+
+	printf("+++ Start Acheter Series +++\n");
+	result_acheter_serie = acheter_serie_1(&acheter_serie_1_arg, clnt);
+	if (result_acheter_serie == (int *) NULL) {
+		clnt_perror (clnt, "Acheter Serie call failed");
+	} else {
+		if (*result_acheter_serie == 0){
+			// echec
+			printf("acheter_serie_1 echec\n");
+		}else{
+			//echec
+			printf("acheter_serie_1 reussi\n");
+		}
+	}
+	printf("+++ End Acheter Series +++\n\n");
+
+
+	printf("--------------------11--------------------\n\n");
+
+
+	printf("+++ Start Afficher Coin +++\n");
+	result_afficher_coin = afficher_coin_1(&afficher_coin_1_arg, clnt);
+	if (result_afficher_coin == (int *) NULL) {
+		clnt_perror (clnt, "Afficher Coincall failed");
+	}else{
+		printf("Vous avez : %d coin(s) \n",*result_afficher_coin);
+	}
+	printf("+++ End Afficher Coin +++\n\n");
+	
+
+	printf("--------------------12--------------------\n\n");
+
+
 	printf("+++ Start Ajouter Favoris +++\n");
 	strcpy(ajouter_favoris_1_arg.compteAcheteur.pseudo,"Le Narrateur");
 	result_ajouter_favoris = ajouter_favoris_1(&ajouter_favoris_1_arg, clnt);
@@ -206,22 +269,29 @@ webtoon_prog_1(char *host)
 	}
 	printf("+++ End Ajouter Favoris +++\n\n");
 
+
+	printf("--------------------13--------------------\n\n");
+
+
 	printf("+++ Start Ajouter Favoris +++\n");
 	strcpy(afficher_favoris_1_arg.pseudo,"Le Narrateur");
 	result_afficher_favoris = afficher_favoris_1(&afficher_favoris_1_arg, clnt);
 	if (result_afficher_favoris == (listSerie *) NULL) {
 		clnt_perror (clnt, "Afficher Favoris call failed");
 	}else{
-		if(result_afficher_serie != NULL){
+		if(result_afficher_favoris != NULL){
 			printf("Les Series favorites de %s\n", afficher_favoris_1_arg.pseudo);
-			for(int i=0; i<result_afficher_serie->nbSerie; i++){
-				printf("%s\n",result_afficher_serie->listSerie[i].titre);
+			for(int i=0; i<result_afficher_favoris->nbSerie; i++){
+				printf("%s\n",result_afficher_favoris->listSerie[i].titre);
 			}
 		}
 	}
 	printf("+++ End Ajouter Favoris +++\n\n");
 	
 	
+	printf("--------------------14--------------------\n\n");
+
+
 	printf("+++ Start Ajouter Commentaire +++\n");
 	strcpy(ajouter_commentaire_1_arg.c.comm, "sympa");
 	strcpy(ajouter_commentaire_1_arg.c.pseudo, "Le Narrateur");
@@ -241,6 +311,9 @@ webtoon_prog_1(char *host)
 	printf("+++ End Ajouter Commentaire +++\n\n");
 
 	
+	printf("--------------------15--------------------\n\n");
+
+
 	printf("+++ Start Ajouter Note +++\n");
 	ajouter_note_1_arg.note = 10;
 	strcpy(ajouter_note_1_arg.serieNote.titre,"Locked");
@@ -259,6 +332,9 @@ webtoon_prog_1(char *host)
 	printf("+++ End Ajouter Note +++\n\n");
 
 	
+	printf("--------------------16--------------------\n\n");
+
+
 	printf("+++ Start Supprimer Favoris +++\n");
 	strcpy(supprimer_favoris_1_arg.serieAchete.titre,"Locked");
 	strcpy(supprimer_favoris_1_arg.compteAcheteur.pseudo,"Le Narrateur");
@@ -275,6 +351,9 @@ webtoon_prog_1(char *host)
 		}
 	}
 	printf("+++ End Supprimer Favoris +++\n\n");
+
+
+	printf("--------------------17--------------------\n\n");
 
 
 	printf("+++ Start Supprimer Commentaire +++\n");

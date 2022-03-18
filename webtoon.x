@@ -7,7 +7,7 @@ struct argAjoutComm{serie s; commentaire c;};
 struct argAjouterNote{serie serieNote; int note;};
 struct argTri{int tri; genre genreChoisi;};
 struct listSerie{int nbSerie; serie listSerie[5];};
-struct compte{char pseudo[15]; char mdp[15]; int carteBancaire; int serieFavorite[15]; int serieAchete[15]; int coin;};
+struct compte{char pseudo[15]; char mdp[15]; int carteBancaire; int nbSerieFavorite; int serieFavorite[15]; int nbSerieAchete; int serieAchete[15]; int coin;};
 struct argAchaCoin{compte compteAcheteur; int nbCoin;};
 struct argAchaSerie{serie serieAchete; compte compteAcheteur;};
 

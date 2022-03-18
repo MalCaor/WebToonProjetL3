@@ -74,7 +74,9 @@ struct compte {
 	char pseudo[15];
 	char mdp[15];
 	int carteBancaire;
+	int nbSerieFavorite;
 	int serieFavorite[15];
+	int nbSerieAchete;
 	int serieAchete[15];
 	int coin;
 };
