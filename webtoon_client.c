@@ -254,6 +254,7 @@ webtoon_prog_1(char *host)
 
 
 	printf("+++ Start Ajouter Favoris +++\n");
+	strcpy(ajouter_favoris_1_arg.serieAchete.titre,"Le Hero");
 	strcpy(ajouter_favoris_1_arg.compteAcheteur.pseudo,"Le Narrateur");
 	result_ajouter_favoris = ajouter_favoris_1(&ajouter_favoris_1_arg, clnt);
 	if (result_ajouter_favoris == (int *) NULL) {
@@ -274,6 +275,27 @@ webtoon_prog_1(char *host)
 
 
 	printf("+++ Start Ajouter Favoris +++\n");
+	strcpy(ajouter_favoris_1_arg.serieAchete.titre,"Locked");
+	strcpy(ajouter_favoris_1_arg.compteAcheteur.pseudo,"Le Narrateur");
+	result_ajouter_favoris = ajouter_favoris_1(&ajouter_favoris_1_arg, clnt);
+	if (result_ajouter_favoris == (int *) NULL) {
+		clnt_perror (clnt, "Ajouter Favoris call failed");
+	} else {
+		if (*result_ajouter_favoris == 0){
+			// echec
+			printf("ajouter_favoris_1 echec\n");
+		}else{
+			//echec
+			printf("ajouter_favoris_1 reussi\n");
+		}
+	}
+	printf("+++ End Ajouter Favoris +++\n\n");
+
+
+	printf("--------------------14--------------------\n\n");
+
+
+	printf("+++ Start Afficher Favoris +++\n");
 	strcpy(afficher_favoris_1_arg.pseudo,"Le Narrateur");
 	result_afficher_favoris = afficher_favoris_1(&afficher_favoris_1_arg, clnt);
 	if (result_afficher_favoris == (listSerie *) NULL) {
@@ -286,10 +308,10 @@ webtoon_prog_1(char *host)
 			}
 		}
 	}
-	printf("+++ End Ajouter Favoris +++\n\n");
+	printf("+++ End Afficher Favoris +++\n\n");
 	
 	
-	printf("--------------------14--------------------\n\n");
+	printf("--------------------15--------------------\n\n");
 
 
 	printf("+++ Start Ajouter Commentaire +++\n");
@@ -311,7 +333,7 @@ webtoon_prog_1(char *host)
 	printf("+++ End Ajouter Commentaire +++\n\n");
 
 	
-	printf("--------------------15--------------------\n\n");
+	printf("--------------------16--------------------\n\n");
 
 
 	printf("+++ Start Ajouter Note +++\n");
@@ -332,7 +354,7 @@ webtoon_prog_1(char *host)
 	printf("+++ End Ajouter Note +++\n\n");
 
 	
-	printf("--------------------16--------------------\n\n");
+	printf("--------------------17--------------------\n\n");
 
 
 	printf("+++ Start Supprimer Favoris +++\n");
@@ -353,7 +375,7 @@ webtoon_prog_1(char *host)
 	printf("+++ End Supprimer Favoris +++\n\n");
 
 
-	printf("--------------------17--------------------\n\n");
+	printf("--------------------18--------------------\n\n");
 
 
 	printf("+++ Start Supprimer Commentaire +++\n");

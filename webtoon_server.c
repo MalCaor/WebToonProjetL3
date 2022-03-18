@@ -179,9 +179,10 @@ acheter_serie_1_svc(argAchaSerie *argp, struct svc_req *rqstp)
 							tabCompte[i].coin -= 50;
 							result=1;
 							tabCompte[i].serieAchete[tabCompte[i].nbSerieAchete] = tabSerie[lesSeries].idSerie;
+							
 							printf("- Transaction Effectué -\n");
 							printf("- %s ajouté au compte du client -\n", tabSerie[lesSeries].titre);
-
+							tabCompte[i].nbSerieAchete++;
 						}
 					}
 				}
@@ -315,11 +316,37 @@ int *
 ajouter_favoris_1_svc(argAchaSerie *argp, struct svc_req *rqstp)
 {
 	static int  result;
+	int dejaFavoris=0;
 
-	/*
-	 * insert server code here
-	 */
+	printf("+++ Start Ajouter Favoris +++\n");
 
+	for(int compte=0;compte<nbCompte;compte++){
+		if(strcmp(argp->compteAcheteur.pseudo,tabCompte[compte].pseudo)==0){
+			for(int fav=0;fav<tabCompte[compte].nbSerieFavorite;fav++){
+				for(int serie=0;serie<nbSerie;serie++){
+					if(strcmp(argp->serieAchete.titre,tabSerie[serie].titre)==0){
+						if(tabCompte[compte].serieFavorite[fav]==tabSerie[serie].idSerie){
+							printf("- serie deja en favoris -\n");
+							dejaFavoris=1;
+						}
+					}
+				}
+			}
+
+			if(dejaFavoris==0){
+				for(int serie=0;serie<nbSerie;serie++){
+					if(strcmp(argp->serieAchete.titre,tabSerie[serie].titre)==0){
+						tabCompte[compte].serieFavorite[tabCompte[compte].nbSerieFavorite] = tabSerie[serie].idSerie;
+						printf("La serie %s a été ajouté au favoris\n",tabSerie[serie].titre);
+						tabCompte[compte].nbSerieFavorite++;
+					}
+				}
+			}
+
+		}
+	}
+
+	printf("+++ Start Ajouter Favoris +++\n\n");
 	return &result;
 }
 
