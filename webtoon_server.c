@@ -404,14 +404,22 @@ ajouter_commentaire_1_svc(argAjoutComm *argp, struct svc_req *rqstp)
 		if(strcmp(tabCompte[i].pseudo, argp->c.pseudo) == 0){
 			// le pseudo est valide
 
-			argp->s.listComm[argp->s.nbCommentaire] = argp->c;
-			argp->s.nbCommentaire++;
+			for (size_t y = 0; y < nbSerie; y++)
+			{
+				if(strcmp(argp->s.titre,tabSerie[y].titre)==0){
+					tabSerie[y].listComm[tabSerie[y].nbCommentaire] = argp->c;
+					tabSerie[y].nbCommentaire++;
 
-			printf("- commentaire \" %s \" par %s ajouté -\n", argp->c.comm, argp->c.pseudo);
+					printf("- commentaire \" %s \" par %s ajouté -\n", argp->c.comm, argp->c.pseudo);
 
-			result = 1;
-			printf("+++ End Ajouter Commentaire +++\n\n");
-			return &result;
+					result = 1;
+					printf("+++ End Ajouter Commentaire +++\n\n");
+					return &result;
+				}
+			}
+			
+
+			
 		}
 	}
 
@@ -429,9 +437,20 @@ supprimer_commentaire_1_svc(argAjoutComm *argp, struct svc_req *rqstp)
 {
 	static int  result;
 
-	/*
-	 * insert server code here
-	 */
+	printf("+++ Start Supprimer Commentaire +++\n");
+
+	if(argp->s.nbCommentaire == 0)
+	{
+		printf("- il n'y a pas de commentaire pour cette serie -\n");
+
+		result = 0;
+
+		printf("+++ End Ajouter Commentaire +++\n\n");
+
+		return &result;
+	}
+
+	printf("+++ End Ajouter Commentaire +++\n\n");
 
 	return &result;
 }
